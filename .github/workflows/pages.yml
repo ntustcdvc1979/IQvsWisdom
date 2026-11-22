@@ -1,0 +1,55 @@
+# 發佈到 GitHub Pages。Firebase API key 不放在 repo 裡，
+# 而是在發佈時從 repo secret「FIREBASE_API_KEY」寫入 firebase-config.js。
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Write firebase-config.js
+        env:
+          FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
+        run: |
+          if [ -z "$FIREBASE_API_KEY" ]; then
+            echo "::error::Repo secret FIREBASE_API_KEY is not set (Settings → Secrets and variables → Actions)."
+            exit 1
+          fi
+          cat > firebase-config.js <<EOF
+          // 由 GitHub Actions 產生；API key 來自 repo secret FIREBASE_API_KEY
+          window.FIREBASE_CONFIG = {
+            apiKey: "${FIREBASE_API_KEY}",
+            authDomain: "iq-tax-4q.firebaseapp.com",
+            projectId: "iq-tax-4q",
+            storageBucket: "iq-tax-4q.firebasestorage.app",
+            messagingSenderId: "243777640133",
+            appId: "1:243777640133:web:c5717604c086ab2156c2ac"
+          };
+          EOF
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - id: deployment
+        uses: actions/deploy-pages@v4

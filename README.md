@@ -20,30 +20,20 @@ PIN 只存在 Firestore 的 `config/host`（網頁讀不到），不在程式碼
 
 ## Firebase 設定（全班即時統計）
 
-沒設定 Firebase 時，網站一樣能用，只是不會顯示全班結果。
+專案 `iq-tax-4q` 已建立好：Firestore（asia-east1）、匿名登入、授權網域、[`firestore.rules`](firestore.rules)。
 
-1. 到 <https://console.firebase.google.com> 建立專案（Google Analytics 可關閉）。
-2. **Build → Authentication → Get started → Sign-in method**：啟用 **Anonymous（匿名）**。
-3. **Build → Firestore Database → Create database**：位置選 `asia-east1`（台灣），以 **production mode** 建立。
-4. Firestore 的 **Rules** 分頁：把 [`firestore.rules`](firestore.rules) 的內容整段貼上，按 **Publish**。
-5. **專案設定（齒輪）→ 一般 → 你的應用程式 → `</>` Web**：註冊一個網頁應用程式（不用勾 Hosting），複製 `firebaseConfig`。
-6. 把設定貼進 [`firebase-config.js`](firebase-config.js)：
+**API key 不放在 repo 裡。**
+- 正式網站：GitHub Actions（[`.github/workflows/pages.yml`](.github/workflows/pages.yml)）發佈時，
+  從 repo secret `FIREBASE_API_KEY` 產生 `firebase-config.js`。
+  需要的設定：**Settings → Secrets and variables → Actions** 新增 `FIREBASE_API_KEY`；
+  **Settings → Pages → Source** 選 **GitHub Actions**。
+- 本機預覽：把 [`firebase-config.example.js`](firebase-config.example.js) 複製成 `firebase-config.js` 並填入 key（已列入 .gitignore）。
 
-   ```js
-   window.FIREBASE_CONFIG = {
-     apiKey: "…",
-     authDomain: "….firebaseapp.com",
-     projectId: "…",
-     storageBucket: "…",
-     messagingSenderId: "…",
-     appId: "…"
-   };
-   ```
+這把網頁 API key 在 Google Cloud 已限制只能從 `ntustcdvc1979.github.io`、`iq-tax-4q.firebaseapp.com`、
+`localhost:8321` 使用，且只能呼叫登入與 Firestore。資料安全由 `firestore.rules` 控管：
+每位學員只能寫入自己那一筆，只有用 PIN 登入的主持人能清空。
 
-7. **Authentication → Settings → Authorized domains**：加入 `ntustcdvc1979.github.io`。
-
-這組 `firebaseConfig` 本來就是公開在網頁上的設定，不是密碼；資料安全由 `firestore.rules` 控管：
-每位學員只能寫入自己那一筆，不能刪除，也不能寫入其他路徑。
+修改規則後部署：`npx firebase-tools deploy --only firestore:rules`
 
 ## 資料
 
