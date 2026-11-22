@@ -27,10 +27,10 @@ jobs:
 
       - name: Write firebase-config.js
         env:
-          FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
+          FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY || vars.FIREBASE_API_KEY }}
         run: |
           if [ -z "$FIREBASE_API_KEY" ]; then
-            echo "::error::Repo secret FIREBASE_API_KEY is not set (Settings → Secrets and variables → Actions)."
+            echo "::error::FIREBASE_API_KEY not found as a repo Actions secret or variable (Settings → Secrets and variables → Actions → Repository)."
             exit 1
           fi
           cat > firebase-config.js <<EOF
