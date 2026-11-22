@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>IQ vs 智慧</title>
+<title>4Q講座－智商稅退散</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap" rel="stylesheet">
 <style>
@@ -75,6 +75,16 @@ table.cmp td:nth-child(3){color:var(--accent)}
 .quote{font-family:"Noto Serif TC",serif;font-size:64px;line-height:1.45;font-weight:900}
 .cite{font-size:20px;color:var(--muted);line-height:1.5}
 #progress{position:fixed;left:0;bottom:0;height:4px;background:var(--accent);transition:width .3s;z-index:9}
+.live{font-size:28px;color:var(--good);margin-top:16px;min-height:1.4em}
+.live b{font-size:40px;margin:0 6px}
+.stat{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-bottom:18px}
+.stat .card{text-align:center;padding:14px 20px}
+.stat b{display:block;font-size:62px;line-height:1.1;font-weight:900}
+.stat small{font-size:24px;color:var(--muted)}
+table.teams td,table.teams th{font-size:24px;padding:6px 18px;text-align:center}
+table.teams td:first-child{text-align:left;width:auto;color:var(--ink)}
+table.teams td.win{color:var(--good);font-weight:700}
+.wait{font-size:30px;color:var(--muted)}
 #hint{position:fixed;right:14px;bottom:10px;font-size:13px;color:var(--muted);opacity:.6;z-index:9}
 </style>
 </head>
@@ -83,8 +93,9 @@ table.cmp td:nth-child(3){color:var(--accent)}
 
 <!-- 1 封面 -->
 <section class="slide cover">
-  <div class="kicker">一場關於判斷力的實驗</div>
-  <h1>IQ<span class="vs">vs</span>智慧</h1>
+  <div class="kicker">4Q 講座</div>
+  <h1>智商稅退散</h1>
+  <p class="big" style="margin:18px 0 0;font-size:56px">IQ<span class="vs" style="font-size:44px;margin:0 18px">vs</span>智慧</p>
   <p class="big muted" style="margin-top:30px">先別急著聽我講 —— 我們先去一趟太平洋。</p>
   <svg class="wave" viewBox="0 0 1600 220" preserveAspectRatio="none"><path d="M0 120 Q 200 60 400 120 T 800 120 T 1200 120 T 1600 120 V220 H0Z" fill="#0f3a57"/><path d="M0 160 Q 200 110 400 160 T 800 160 T 1200 160 T 1600 160 V220 H0Z" fill="#134a6e"/></svg>
 </section>
@@ -94,7 +105,7 @@ table.cmp td:nth-child(3){color:var(--accent)}
   <div class="kicker">情境</div>
   <h2>你在太平洋上漂流</h2>
   <p class="f">你和三位朋友租了一艘遊艇橫渡太平洋。途中廚房起火，<span class="accent">船長和船員在救火時罹難</span>，船正在慢慢下沉。</p>
-  <p class="f">導航和無線電都燒壞了。你只知道：離最近的陸地，<span class="accent">還有好幾百英里</span>。</p>
+  <p class="f">導航和無線電都燒壞了。你只知道：離最近的陸地，<span class="accent">還有好幾百公里</span>。</p>
   <p class="f">你們搶救出 <b class="sea">14 件物品</b>，還有一艘四人橡皮救生筏和一盒火柴。</p>
 </section>
 
@@ -120,6 +131,7 @@ table.cmp td:nth-child(3){color:var(--accent)}
       </ul>
       <div class="timer" data-sec="600"><span class="t">10:00</span><button class="primary">開始</button><button>重設</button></div>
       <div class="url" id="qrUrl"></div>
+      <div class="live" data-live="ind"></div>
     </div>
   </div>
 </section>
@@ -132,6 +144,7 @@ table.cmp td:nth-child(3){color:var(--accent)}
     <div>
       <p style="margin-top:0">在手機上按「完成個人排序」後，進入團隊排序。每個人都可以在自己的手機上記錄團隊答案。</p>
       <div class="timer" data-sec="1200"><span class="t">20:00</span><button class="primary">開始</button><button>重設</button></div>
+      <div class="live" data-live="grp"></div>
     </div>
     <div class="card">
       <h3 class="accent">討論守則</h3>
@@ -178,6 +191,20 @@ table.cmp td:nth-child(3){color:var(--accent)}
   <h2>在手機上輸入代碼<span class="code">36</span></h2>
   <p class="muted" style="font-size:26px;margin:-14px 0 24px">（36 = 大多數海上救援發生的黃金時數）</p>
   <table class="cmp bands" id="bandTbl"></table>
+</section>
+
+<!-- 全班成績（Firebase） -->
+<section class="slide" style="padding-top:70px">
+  <div class="kicker">全班成績｜即時</div>
+  <h2 style="margin-bottom:26px">團隊，有比個人好嗎？</h2>
+  <div id="classStats"><p class="wait">等待資料…</p></div>
+</section>
+
+<!-- 最常見的誤判（Firebase） -->
+<section class="slide">
+  <div class="kicker">全班最常見的誤判</div>
+  <h2>我們的直覺，和專家差最多的地方</h2>
+  <div id="classMiss"><p class="wait">等待資料…</p></div>
 </section>
 
 <!-- 10 回組討論 -->
@@ -262,6 +289,8 @@ table.cmp td:nth-child(3){color:var(--accent)}
 <div id="hint">← → 換頁　F 全螢幕　T 計時</div>
 
 <script src="data.js"></script>
+<script src="firebase-config.js"></script>
+<script type="module" src="cloud.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 (function(){
@@ -288,7 +317,10 @@ table.cmp td:nth-child(3){color:var(--accent)}
 
   // QR Code：預設指向同一資料夾的 sea.html，可用 ?qr=網址 覆寫
   var q=new URLSearchParams(location.search).get("qr");
-  var url=q || new URL("sea.html", location.href).href;
+  // 班級代碼：?c= 指定，否則用今天日期；學員資料依代碼分開
+  var P=new URLSearchParams(location.search), d=new Date();
+  var classId=(P.get("c")||(""+d.getFullYear()+String(d.getMonth()+1).padStart(2,"0")+String(d.getDate()).padStart(2,"0"))).slice(0,40);
+  var url=q || new URL("sea.html?c="+encodeURIComponent(classId), location.href).href;
   document.getElementById("qrUrl").textContent=url;
   try { new QRCode(document.getElementById("qr"),{text:url,width:380,height:380,correctLevel:QRCode.CorrectLevel.M}); }
   catch(e){ document.getElementById("qr").innerHTML="<div style='width:380px;height:380px;display:grid;place-items:center;color:#333;font-size:22px;text-align:center'>QR Code 載入失敗<br>請確認網路連線</div>"; }
@@ -332,6 +364,91 @@ table.cmp td:nth-child(3){color:var(--accent)}
     btn[1].onclick=function(){ clearInterval(h); h=null; left=total; btn[0].textContent="開始"; draw(); };
     draw();
   });
+
+  // ===== Firebase 即時統計 =====
+  function esc(t){ return String(t==null?"":t).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+  function full(o){ return Array.isArray(o) && o.length===14; }
+  function avg(a){ return a.length? a.reduce(function(x,y){return x+y;},0)/a.length : NaN; }
+  function f1(n){ return isNaN(n)?"–":(Math.round(n*10)/10).toString(); }
+  function mode(a){ var c={},best=null; a.forEach(function(x){c[x]=(c[x]||0)+1; if(best===null||c[x]>c[best]||(c[x]===c[best]&&x<best)) best=x;}); return best; }
+
+  // 6 組以內一張表；更多組時分左右兩欄（最多 14 組）
+  function teamTables(trs){
+    if(!trs.length) return "";
+    var two=trs.length>6, head=two
+      ? "<tr><th>組別</th><th>個人平均</th><th>最佳</th><th>團隊</th></tr>"
+      : "<tr><th>組別</th><th>人數</th><th>個人平均</th><th>最佳個人</th><th>團隊分數</th><th>結果</th></tr>";
+    if(!two) return "<table class='cmp teams'>"+head+trs.join("")+"</table>";
+    var shown=trs.slice(0,14).map(function(r){ // 兩欄時省略「人數」「結果」欄
+      return r.replace(/<td>\d+<\/td>/,"").replace(/<td>[^<]*<\/td><\/tr>$/,"</tr>");
+    }), h=Math.ceil(shown.length/2);
+    return "<div class='grid2' style='gap:40px'><table class='cmp teams'>"+head+shown.slice(0,h).join("")+"</table><table class='cmp teams'>"+head+shown.slice(h).join("")+"</table></div>"+
+      (trs.length>14?"<p class='muted' style='font-size:22px;margin:8px 0 0'>另有 "+(trs.length-14)+" 組未顯示</p>":"");
+  }
+
+  function renderLive(rows){
+    var nInd=rows.filter(function(r){return full(r.ind);}).length;
+    var nGrp=rows.filter(function(r){return full(r.grp);}).length;
+    [].forEach.call(document.querySelectorAll("[data-live]"),function(el){
+      el.innerHTML = el.dataset.live==="ind"
+        ? "已完成個人排序<b>"+nInd+"</b>人"
+        : "已完成團隊排序<b>"+nGrp+"</b>人　<span class='muted'>（個人 "+nInd+" 人）</span>";
+    });
+
+    // 全班成績
+    var ind=rows.filter(function(r){return full(r.ind);}).map(function(r){return S.score(r.ind);});
+    var teams={};
+    rows.forEach(function(r){
+      var k=r.team||"未分組"; if(!teams[k]) teams[k]={ind:[],grp:[]};
+      if(full(r.ind)) teams[k].ind.push(S.score(r.ind));
+      if(full(r.grp)) teams[k].grp.push(S.score(r.grp));
+    });
+    var names=Object.keys(teams).filter(function(k){return teams[k].grp.length;})
+      .sort(function(a,b){return (parseInt(a.replace(/\D/g,""))||999)-(parseInt(b.replace(/\D/g,""))||999);});
+    var teamScores=names.map(function(k){return mode(teams[k].grp);});
+    var beatAvg=0, beatBest=0;
+    var trs=names.map(function(k,i){
+      var t=teams[k], ts=teamScores[i], a=avg(t.ind), b=t.ind.length?Math.min.apply(null,t.ind):NaN;
+      if(ts<a) beatAvg++; if(ts<b) beatBest++;
+      return "<tr><td>"+esc(k)+"</td><td>"+t.ind.length+"</td><td>"+f1(a)+"</td><td>"+(isNaN(b)?"–":b)+"</td><td class='"+(ts<a?"win":"")+"'>"+ts+"</td><td>"+esc(S.band(ts).label)+"</td></tr>";
+    });
+    var cs=document.getElementById("classStats");
+    if(!ind.length && !names.length){ cs.innerHTML="<p class='wait'>等待資料…（班級代碼 "+esc(classId)+"）</p>"; }
+    else cs.innerHTML=
+      "<div class='stat'><div class='card'><small>個人平均分數</small><b>"+f1(avg(ind))+"</b><small>"+ind.length+" 人</small></div>"+
+      "<div class='card'><small>團隊平均分數</small><b class='accent'>"+f1(avg(teamScores))+"</b><small>"+names.length+" 組</small></div>"+
+      "<div class='card'><small>贏過組內平均／贏過組內最佳個人</small><b class='sea'>"+beatAvg+" / "+beatBest+"</b><small>組</small></div></div>"+
+      teamTables(trs);
+
+    // 最常見的誤判：全班個人排序的平均名次 vs 專家名次
+    var cm=document.getElementById("classMiss");
+    var src=rows.filter(function(r){return full(r.ind);});
+    if(!src.length){ cm.innerHTML="<p class='wait'>等待資料…</p>"; return; }
+    var miss=S.items.map(function(it){
+      var rk=src.map(function(r){return r.ind.indexOf(it.id)+1;});
+      return {it:it, avgRank:avg(rk), err:avg(rk.map(function(x){return Math.abs(x-it.rank);}))};
+    }).sort(function(a,b){return b.err-a.err;}).slice(0,5);
+    cm.innerHTML="<table class='cmp teams'><tr><th>物品</th><th>全班平均排第</th><th>專家排第</th><th>平均差距</th></tr>"+
+      miss.map(function(m){
+        var dir=m.avgRank<m.it.rank?"高估":"低估";
+        return "<tr><td>"+esc(m.it.name)+"</td><td>"+f1(m.avgRank)+"</td><td class='accent'>"+m.it.rank+"</td><td>"+f1(m.err)+" <span class='muted' style='font-size:22px'>"+dir+"</span></td></tr>";
+      }).join("")+"</table><p class='muted' style='font-size:24px;margin-top:18px'>依 "+src.length+" 份個人排序統計</p>";
+  }
+
+  function startLive(){
+    var c=window.SEACLOUD;
+    if(!c) return;
+    if(!c.enabled){
+      [].forEach.call(document.querySelectorAll("[data-live]"),function(el){el.innerHTML="";});
+      ["classStats","classMiss"].forEach(function(id){document.getElementById(id).innerHTML="<p class='wait'>尚未設定 Firebase（firebase-config.js），無法顯示全班結果。</p>";});
+      return;
+    }
+    c.watch(classId, renderLive, function(e){
+      console.warn(e);
+      document.getElementById("classStats").innerHTML="<p class='wait'>讀取失敗："+esc(e.message)+"</p>";
+    }).catch(function(e){ console.warn(e); });
+  }
+  if(window.SEACLOUD) startLive(); else addEventListener("seacloud",startLive);
 
   var start=parseInt(location.hash.slice(1),10);
   show(isNaN(start)?0:start-1);
