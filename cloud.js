@@ -31,6 +31,37 @@ window.SEACLOUD = {
       { merge: true }
     );
   },
+  // 監看班級狀態（round 變了代表主持人清空過）
+  async watchClass(classId, cb) {
+    if (!ready) throw new Error("Firebase 未設定");
+    const { db, fs } = await ready;
+    return fs.onSnapshot(fs.doc(db, "classes", classId), (d) => cb(d.exists() ? d.data() : {}), () => {});
+  },
+  // 主持人：目前這個瀏覽器是否已登記
+  async isHost() {
+    if (!ready) return false;
+    const { db, uid, fs } = await ready;
+    try { return (await fs.getDoc(fs.doc(db, "hosts", uid))).exists(); } catch (e) { return false; }
+  },
+  // 主持人：用 PIN 登記（PIN 錯誤時規則會拒絕）
+  async hostLogin(pin) {
+    const { db, uid, fs } = await ready;
+    await fs.setDoc(fs.doc(db, "hosts", uid), { pin: String(pin), at: fs.serverTimestamp() });
+  },
+  // 主持人：刪除本班所有作答，並讓 round + 1 通知所有手機重新開始；回傳刪除筆數
+  async clearClass(classId) {
+    const { db, fs } = await ready;
+    const snap = await fs.getDocs(fs.collection(db, "classes", classId, "responses"));
+    const docs = snap.docs;
+    for (let i = 0; i < docs.length; i += 400) {
+      const b = fs.writeBatch(db);
+      docs.slice(i, i + 400).forEach((d) => b.delete(d.ref));
+      await b.commit();
+    }
+    await fs.setDoc(fs.doc(db, "classes", classId),
+      { round: fs.increment(1), clearedAt: fs.serverTimestamp() }, { merge: true });
+    return docs.length;
+  },
   // 即時監看整個班級的作答；回傳取消函式
   async watch(classId, cb, onErr) {
     if (!ready) throw new Error("Firebase 未設定");

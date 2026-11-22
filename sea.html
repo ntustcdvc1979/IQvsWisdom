@@ -161,6 +161,17 @@ td .why{display:block;color:var(--muted);font-size:12px;line-height:1.4;margin-t
     if (st.ind.length===14 && st.step>=2 && st.sync.ind!=="ok") upload("ind");
     if (st.grp.length===14 && st.step>=3 && st.sync.grp!=="ok") upload("grp");
     showSync();
+    // 主持人清空答案時（round 改變），手機回到開始畫面
+    var cloud = window.SEACLOUD;
+    if (st.classId && cloud && cloud.enabled) cloud.watchClass(st.classId, function(c){
+      var r = c.round || 0;
+      if (st.round === undefined){ st.round = r; save(); return; }
+      if (r !== st.round){
+        st = { step:0, nick:st.nick, team:st.team, classId:st.classId, sync:{}, ind:[], grp:[], round:r };
+        save(); render(); window.scrollTo(0,0);
+        $("subtitle").textContent = "主持人已清空所有答案，請重新作答。";
+      }
+    }).catch(function(e){ console.warn(e); });
   });
   function load(){ try { return JSON.parse(localStorage.getItem(KEY)); } catch(e){ return null; } }
   function save(){ try { localStorage.setItem(KEY, JSON.stringify(st)); } catch(e){} }
@@ -283,7 +294,7 @@ td .why{display:block;color:var(--muted);font-size:12px;line-height:1.4;margin-t
       $("codeMsg").textContent=""; st.step=4;
     } else {
       if (!confirm("要清除這次的排序，重新開始嗎？")) return;
-      st={ step:0, nick:st.nick, team:st.team, classId:st.classId, sync:{}, ind:[], grp:[] };
+      st={ step:0, nick:st.nick, team:st.team, classId:st.classId, sync:{}, ind:[], grp:[], round:st.round };
     }
     save(); render(); window.scrollTo(0,0);
   };

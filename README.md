@@ -12,6 +12,12 @@ QR Code 會帶上班級代碼 `?c=…`，不同場次的資料分開存放。
 https://ntustcdvc1979.github.io/IQvsWisdom/?c=morning
 ```
 
+## 主持人：清空答案
+
+簡報上按 **H**（或左下角 ⚙）開啟主持人面板，第一次輸入主持人 PIN 登入後，
+可「清空本班所有答案」：刪除該班級代碼的所有作答，學員手機會自動回到開始畫面。
+PIN 只存在 Firestore 的 `config/host`（網頁讀不到），不在程式碼裡。
+
 ## Firebase 設定（全班即時統計）
 
 沒設定 Firebase 時，網站一樣能用，只是不會顯示全班結果。

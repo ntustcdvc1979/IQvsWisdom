@@ -14,8 +14,8 @@
 }
 *{box-sizing:border-box}
 html,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC",system-ui,sans-serif}
-#viewport{position:fixed;inset:0;display:grid;place-items:center}
-#stage{width:1600px;height:900px;position:relative;transform-origin:center center;flex:none}
+#viewport{position:fixed;inset:0;overflow:hidden}
+#stage{width:1600px;height:900px;position:absolute;left:50%;top:50%;margin:-450px 0 0 -800px;transform-origin:center center}
 .slide{position:absolute;inset:0;padding:90px 110px;display:none;flex-direction:column;
   background:radial-gradient(ellipse at 80% 110%, #0f3a57 0%, transparent 60%), var(--bg)}
 .slide.on{display:flex}
@@ -33,6 +33,8 @@ ul.clean li::before{content:"";position:absolute;left:6px;top:.62em;width:16px;h
 .f{opacity:0;transform:translateY(14px);transition:opacity .45s,transform .45s}
 .f.show{opacity:1;transform:none}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+.book{margin-left:18px;padding:2px 14px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:20px;letter-spacing:.05em;font-weight:500}
 .card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:30px 36px}
 .card h3{margin:0 0 10px;font-size:36px}
 .card p{margin:0;font-size:30px;line-height:1.55}
@@ -85,6 +87,15 @@ table.teams td,table.teams th{font-size:24px;padding:6px 18px;text-align:center}
 table.teams td:first-child{text-align:left;width:auto;color:var(--ink)}
 table.teams td.win{color:var(--good);font-weight:700}
 .wait{font-size:30px;color:var(--muted)}
+#hostBtn{position:fixed;left:10px;bottom:8px;z-index:20;background:none;border:0;color:var(--muted);opacity:.35;font-size:20px;cursor:pointer}
+#hostBtn:hover{opacity:1}
+#host{position:fixed;left:16px;bottom:44px;z-index:21;width:340px;max-width:calc(100vw - 32px);background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 10px 40px rgba(0,0,0,.5);font-size:15px;line-height:1.6;display:none}
+#host.open{display:block}
+#host h4{margin:0 0 6px;font-size:17px}
+#host input{width:100%;font:inherit;font-size:18px;padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);margin:6px 0}
+#host button{font:inherit;font-size:15px;padding:9px 14px;border-radius:9px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;margin-top:6px}
+#host button.danger{background:var(--bad);border:0;color:#2a0500;font-weight:700;width:100%}
+#host .msg{color:var(--muted);font-size:14px;margin-top:8px;min-height:1.2em}
 #hint{position:fixed;right:14px;bottom:10px;font-size:13px;color:var(--muted);opacity:.6;z-index:9}
 </style>
 </head>
@@ -218,6 +229,31 @@ table.teams td.win{color:var(--good);font-weight:700}
   </ul>
 </section>
 
+<!-- 書：共好與同贏 -->
+<section class="slide">
+  <div class="kicker">團隊的智慧　<span class="book">《共好與同贏》</span></div>
+  <h2>把最會下蛋的雞放在一起，會怎樣？</h2>
+  <div class="grid3">
+    <div class="card f"><h3 class="accent">超級雞實驗</h3><p>生物學家威廉·謬爾每代只挑產蛋最多的雞繁殖。幾代之後，「超級雞群」互啄到只剩少數存活，產量反而輸給普通雞群。</p></div>
+    <div class="card f"><h3 class="accent">螢火蟲</h3><p>各自發光求偶，成功率只有 <b>3%</b>；集體同步發光，成功率提高到 <b>82%</b>。</p></div>
+    <div class="card f"><h3 class="accent">Google 亞里斯多德計劃</h3><p>好團隊的第一個條件不是聰明，而是<b>心理安全感</b>：敢說「我覺得不對」，而不怕被笑。</p></div>
+  </div>
+  <p class="f quote" style="font-size:40px;margin-top:40px">「天分使人贏得球賽，但團隊合作與才智使人贏得冠軍賽。」<span class="cite" style="font-size:24px">— 麥可·喬丹</span></p>
+</section>
+
+<!-- 書：超高效創意思考心智圖法 -->
+<section class="slide">
+  <div class="kicker">下次小組討論時　<span class="book">《超高效創意思考心智圖法》</span></div>
+  <h2>先發散，再收斂</h2>
+  <div class="grid3">
+    <div class="card f"><h3 class="sea">1　創生</h3><p>把所有可能都列出來，<b>先不評論</b>。辯論會讓想法變少。</p></div>
+    <div class="card f"><h3 class="sea">2　分析</h3><p>蒐集資訊、比較每個選項背後的理由。</p></div>
+    <div class="card f"><h3 class="sea">3　選擇</h3><p>決定一個對策，並想清楚怎麼往前走。</p></div>
+  </div>
+  <p class="f" style="margin-top:40px">奧斯朋：「評斷與想像可以互相幫助，但條件是<span class="accent">該隔開時絕對不可放在一起</span>。」</p>
+  <p class="f">鮑林：「找到好點子的最佳方式，就是先想出一大堆點子。」</p>
+</section>
+
 <!-- 11 轉場 -->
 <section class="slide">
   <div class="kicker">為什麼這麼多人排錯？</div>
@@ -225,6 +261,16 @@ table.teams td.win{color:var(--good);font-weight:700}
   <p class="f">所以地圖、收音機、釣具排得很前面 —— 這是在<b>「解題」</b>：怎麼導航？怎麼撐 20 天？</p>
   <p class="f">專家先做了另一件事：<b class="accent">重新定義問題</b>。<br>問題不是「怎麼到陸地」，而是「怎麼讓別人找到我」。</p>
   <p class="f big" style="margin-top:30px">聰明，讓你把題目解得又快又好。<br><span class="accent">智慧，讓你先確認題目對不對。</span></p>
+</section>
+
+<!-- 書：與成功有約 -->
+<section class="slide">
+  <div class="kicker">換個角度看問題　<span class="book">《與成功有約》</span></div>
+  <h2>戰艦與燈塔</h2>
+  <p class="f">濃霧中，戰艦艦長看到前方有燈光，下令發訊：「請轉向 20 度。」</p>
+  <p class="f">對方回覆：「建議你們轉向 20 度。」艦長大怒：「我是戰艦！你轉向！」</p>
+  <p class="f">對方回覆：<b class="accent">「我是燈塔。」</b>　—— 戰艦改了航道。</p>
+  <div class="card f" style="margin-top:30px"><p>柯維：<b>管理</b>是有效地把事情做好；<b class="accent">領導</b>是先確認做的是對的事。<br><span class="muted">救生筏上划得再好，方向錯了也沒用。</span></p></div>
 </section>
 
 <!-- 12 比較 -->
@@ -239,6 +285,18 @@ table.teams td.win{color:var(--good);font-weight:700}
     <tr><td>對自己</td><td>相信自己的推論</td><td>知道自己可能錯</td></tr>
     <tr><td>對別人</td><td>說服別人</td><td>聽懂別人</td></tr>
   </table>
+</section>
+
+<!-- 智商稅 -->
+<section class="slide">
+  <div class="kicker">什麼是智商稅？</div>
+  <h2>聰明人最常繳的四種「智商稅」</h2>
+  <div class="grid2" style="gap:26px 40px">
+    <div class="card f"><h3>1. 忙著證明自己懂</h3><p>梭羅：「如果我們時時忙著展現自己的知識，將何從憶起成長所需的無知？」</p><p class="cite" style="margin-top:8px">《與成功有約》</p></div>
+    <div class="card f"><h3>2. 看不起簡單的事</h3><p>蘇格拉底要學生每天做一個簡單的運動。一年後，只剩柏拉圖還在做。</p><p class="cite" style="margin-top:8px">《態度決定一切》</p></div>
+    <div class="card f"><h3>3. 用同一顆腦袋解決問題</h3><p>愛因斯坦：「用製造問題的同一思維去解決問題，是行不通的。」</p><p class="cite" style="margin-top:8px">《別做熱愛的事，要做真實的自己》</p></div>
+    <div class="card f"><h3>4. 只懷疑別人</h3><p>亨利·阿諾德：「智者質疑自己，愚者質疑他人。」</p><p class="cite" style="margin-top:8px">《精準成長》</p></div>
+  </div>
 </section>
 
 <!-- 13 研究 -->
@@ -276,6 +334,16 @@ table.teams td.win{color:var(--good);font-weight:700}
   </ul>
 </section>
 
+<!-- 帶回岸上 -->
+<section class="slide">
+  <div class="kicker">帶回岸上的三句話</div>
+  <div style="display:flex;flex-direction:column;gap:28px;margin-top:10px">
+    <div class="f"><p class="quote" style="font-size:40px;line-height:1.4">「走錯路的人，需要的不是加速，<br>而是<span class="accent">停下來反思</span>。」</p><p class="cite" style="margin-top:6px">《精準成長》</p></div>
+    <div class="f"><p class="quote" style="font-size:40px;line-height:1.4">「你的海洋真是浩瀚，我的小船真渺小。」</p><p class="cite" style="margin-top:6px">甘迺迪總統白宮辦公桌上的匾額（《精準成長》）</p></div>
+    <div class="f"><p class="quote" style="font-size:40px;line-height:1.4">「除非有離岸的勇氣，否則無法發現<span class="accent">新的海洋</span>。」</p><p class="cite" style="margin-top:6px">安德烈·紀德（《別做熱愛的事，要做真實的自己》）</p></div>
+  </div>
+</section>
+
 <!-- 16 結語 -->
 <section class="slide cover">
   <p class="quote">IQ 幫你找到答案，<br><span class="accent">智慧</span>幫你找到對的問題。</p>
@@ -286,7 +354,20 @@ table.teams td.win{color:var(--good);font-weight:700}
 
 </div></div>
 <div id="progress"></div>
-<div id="hint">← → 換頁　F 全螢幕　T 計時</div>
+<div id="hint">← → 換頁　F 全螢幕　T 計時　H 主持人</div>
+<button id="hostBtn" title="主持人（H）" aria-label="主持人面板">⚙</button>
+<div id="host" role="dialog" aria-label="主持人面板">
+  <h4>主持人</h4>
+  <div>班級代碼：<b id="hCode"></b>　目前 <b id="hCount">–</b> 份作答</div>
+  <div id="hLogin">
+    <input type="password" id="hPin" inputmode="numeric" placeholder="主持人 PIN" autocomplete="off">
+    <button id="hLoginBtn">登入</button>
+  </div>
+  <div id="hTools" style="display:none">
+    <button class="danger" id="hClear">清空本班所有答案</button>
+  </div>
+  <div class="msg" id="hMsg"></div>
+</div>
 
 <script src="data.js"></script>
 <script src="firebase-config.js"></script>
@@ -339,6 +420,9 @@ table.teams td.win{color:var(--good);font-weight:700}
   function next(){ var h=frags(slides[idx]).filter(function(f){return !f.classList.contains("show");}); if(h.length) h[0].classList.add("show"); else if(idx<slides.length-1) show(idx+1); }
   function prevS(){ var v=frags(slides[idx]).filter(function(f){return f.classList.contains("show");}); if(v.length) v[v.length-1].classList.remove("show"); else if(idx>0) show(idx-1,true); }
   addEventListener("keydown",function(e){
+    if (e.target && /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
+    if (e.key==="h"||e.key==="H"){ toggleHost(); return; }
+    if (e.key==="Escape"){ document.getElementById("host").classList.remove("open"); }
     if (["ArrowRight","PageDown"," ","Enter"].indexOf(e.key)>=0){ e.preventDefault(); next(); }
     else if (["ArrowLeft","PageUp","Backspace"].indexOf(e.key)>=0){ e.preventDefault(); prevS(); }
     else if (e.key==="Home") show(0); else if (e.key==="End") show(slides.length-1);
@@ -386,7 +470,9 @@ table.teams td.win{color:var(--good);font-weight:700}
       (trs.length>14?"<p class='muted' style='font-size:22px;margin:8px 0 0'>另有 "+(trs.length-14)+" 組未顯示</p>":"");
   }
 
+  var liveCount=0;
   function renderLive(rows){
+    liveCount=rows.length; var hc=document.getElementById("hCount"); if(hc) hc.textContent=rows.length;
     var nInd=rows.filter(function(r){return full(r.ind);}).length;
     var nGrp=rows.filter(function(r){return full(r.grp);}).length;
     [].forEach.call(document.querySelectorAll("[data-live]"),function(el){
@@ -449,6 +535,31 @@ table.teams td.win{color:var(--good);font-weight:700}
     }).catch(function(e){ console.warn(e); });
   }
   if(window.SEACLOUD) startLive(); else addEventListener("seacloud",startLive);
+
+  // ===== 主持人面板 =====
+  var hostEl=document.getElementById("host"), hMsg=document.getElementById("hMsg");
+  document.getElementById("hCode").textContent=classId;
+  function toggleHost(){ hostEl.classList.toggle("open"); if(hostEl.classList.contains("open")) refreshHost(); }
+  document.getElementById("hostBtn").onclick=function(e){ e.stopPropagation(); toggleHost(); };
+  function showHostTools(on){ document.getElementById("hLogin").style.display=on?"none":""; document.getElementById("hTools").style.display=on?"":"none"; }
+  function refreshHost(){
+    var c=window.SEACLOUD;
+    if(!c||!c.enabled){ hMsg.textContent="尚未設定 Firebase。"; showHostTools(false); return; }
+    c.isHost().then(function(ok){ showHostTools(ok); hMsg.textContent= ok? "已登入為主持人。" : "輸入 PIN 後即可清空答案。"; });
+  }
+  document.getElementById("hPin").onkeydown=function(e){ if(e.key==="Enter") document.getElementById("hLoginBtn").click(); };
+  document.getElementById("hLoginBtn").onclick=function(){
+    var pin=document.getElementById("hPin").value.trim(); if(!pin) return;
+    hMsg.textContent="登入中…";
+    window.SEACLOUD.hostLogin(pin).then(function(){ document.getElementById("hPin").value=""; refreshHost(); })
+      .catch(function(){ hMsg.textContent="PIN 不正確。"; });
+  };
+  document.getElementById("hClear").onclick=function(){
+    if(!confirm("確定要清空班級「"+classId+"」的所有答案嗎？（目前 "+liveCount+" 份）\n學員手機會回到開始畫面，資料無法復原。")) return;
+    hMsg.textContent="清空中…";
+    window.SEACLOUD.clearClass(classId).then(function(n){ hMsg.textContent="已清空 "+n+" 份答案，學員手機已重新開始。"; })
+      .catch(function(e){ hMsg.textContent="清空失敗："+e.message; });
+  };
 
   var start=parseInt(location.hash.slice(1),10);
   show(isNaN(start)?0:start-1);

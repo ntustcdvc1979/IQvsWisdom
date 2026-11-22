@@ -2,21 +2,49 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // 每位學員（匿名登入）只能寫自己那一筆；登入者都能讀，供簡報統計。
-    match /classes/{classId}/responses/{uid} {
-      allow read: if request.auth != null;
+    // 主持人：用 PIN 在 hosts/{uid} 登記過的匿名使用者
+    function isHost() {
+      return request.auth != null
+        && exists(/databases/$(database)/documents/hosts/$(request.auth.uid));
+    }
 
-      allow create, update: if request.auth != null
+    // 主持人 PIN 只存在資料庫（由管理者寫入），任何網頁都讀不到，只有規則能比對
+    match /config/{doc} {
+      allow read, write: if false;
+    }
+
+    // 登記成為主持人：PIN 必須和 config/host 相符
+    match /hosts/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow create: if request.auth != null
         && request.auth.uid == uid
-        && classId.size() <= 40
-        && request.resource.data.keys().hasOnly(['nick', 'team', 'ind', 'grp', 'updatedAt'])
-        && (!('nick' in request.resource.data) || (request.resource.data.nick is string && request.resource.data.nick.size() <= 20))
-        && (!('team' in request.resource.data) || (request.resource.data.team is string && request.resource.data.team.size() <= 20))
-        && (!('ind'  in request.resource.data) || (request.resource.data.ind  is list   && request.resource.data.ind.size()  <= 14))
-        && (!('grp'  in request.resource.data) || (request.resource.data.grp  is list   && request.resource.data.grp.size()  <= 14))
-        && request.resource.data.updatedAt == request.time;
+        && request.resource.data.keys().hasOnly(['pin', 'at'])
+        && request.resource.data.pin == get(/databases/$(database)/documents/config/host).data.pin;
+      allow update, delete: if false;
+    }
 
-      allow delete: if false;
+    // 班級狀態（round：主持人每清空一次就 +1，手機看到就重新開始）
+    match /classes/{classId} {
+      allow read: if request.auth != null;
+      allow write: if isHost()
+        && request.resource.data.keys().hasOnly(['round', 'clearedAt']);
+
+      // 每位學員（匿名登入）只能寫自己那一筆；主持人可以刪除（清空）
+      match /responses/{uid} {
+        allow read: if request.auth != null;
+
+        allow create, update: if request.auth != null
+          && request.auth.uid == uid
+          && classId.size() <= 40
+          && request.resource.data.keys().hasOnly(['nick', 'team', 'ind', 'grp', 'updatedAt'])
+          && (!('nick' in request.resource.data) || (request.resource.data.nick is string && request.resource.data.nick.size() <= 20))
+          && (!('team' in request.resource.data) || (request.resource.data.team is string && request.resource.data.team.size() <= 20))
+          && (!('ind'  in request.resource.data) || (request.resource.data.ind  is list   && request.resource.data.ind.size()  <= 14))
+          && (!('grp'  in request.resource.data) || (request.resource.data.grp  is list   && request.resource.data.grp.size()  <= 14))
+          && request.resource.data.updatedAt == request.time;
+
+        allow delete: if isHost();
+      }
     }
 
     // 其他路徑一律拒絕
