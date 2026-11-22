@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IQ vs 智慧</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#081826; --bg2:#0e2538; --card:#12304a; --line:#244b6d;
+  --ink:#eef5fb; --muted:#9db6cb; --accent:#ffb547; --accent-ink:#2a1a00;
+  --sea:#5cc8e8; --good:#4fd1a5; --bad:#ff7a6b;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC",system-ui,sans-serif}
+#viewport{position:fixed;inset:0;display:grid;place-items:center}
+#stage{width:1600px;height:900px;position:relative;transform-origin:center center;flex:none}
+.slide{position:absolute;inset:0;padding:90px 110px;display:none;flex-direction:column;
+  background:radial-gradient(ellipse at 80% 110%, #0f3a57 0%, transparent 60%), var(--bg)}
+.slide.on{display:flex}
+.kicker{font-size:26px;letter-spacing:.18em;color:var(--sea);font-weight:700;margin-bottom:18px}
+h1{font-family:"Noto Serif TC",serif;font-size:120px;line-height:1.1;margin:0;font-weight:900}
+h2{font-family:"Noto Serif TC",serif;font-size:68px;line-height:1.2;margin:0 0 36px;font-weight:900}
+p,li{font-size:34px;line-height:1.65}
+.muted{color:var(--muted)}
+.accent{color:var(--accent)}
+.sea{color:var(--sea)}
+.big{font-size:44px}
+ul.clean{list-style:none;padding:0;margin:0}
+ul.clean li{padding-left:44px;position:relative;margin:6px 0}
+ul.clean li::before{content:"";position:absolute;left:6px;top:.62em;width:16px;height:16px;border-radius:50%;background:var(--accent)}
+.f{opacity:0;transform:translateY(14px);transition:opacity .45s,transform .45s}
+.f.show{opacity:1;transform:none}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:30px 36px}
+.card h3{margin:0 0 10px;font-size:36px}
+.card p{margin:0;font-size:30px;line-height:1.55}
+.foot{position:absolute;left:110px;right:110px;bottom:40px;font-size:18px;color:var(--muted);display:flex;justify-content:space-between}
+/* cover */
+.cover{justify-content:center}
+.cover .vs{font-family:"Noto Sans TC";font-weight:400;color:var(--muted);font-size:70px;margin:0 24px}
+.wave{position:absolute;left:0;right:0;bottom:0;height:220px;opacity:.5}
+/* items */
+.items{display:grid;grid-template-columns:repeat(2,1fr);gap:14px 40px;margin-top:6px}
+.items div{font-size:30px;padding:10px 22px;border-radius:14px;background:var(--card);border:1px solid var(--line)}
+.items div b{color:var(--sea);display:inline-block;width:46px}
+/* qr */
+.qrwrap{display:flex;gap:70px;align-items:center;flex:1}
+#qr{background:#fff;padding:22px;border-radius:24px;flex:none}
+#qr img,#qr canvas{display:block;width:380px!important;height:380px!important}
+.url{font-family:ui-monospace,Consolas,monospace;font-size:24px;color:var(--sea);word-break:break-all;margin-top:18px}
+/* timer */
+.timer{display:flex;align-items:center;gap:28px;margin-top:28px}
+.timer .t{font-variant-numeric:tabular-nums;font-size:120px;font-weight:900;line-height:1;letter-spacing:.02em}
+.timer.done .t{color:var(--bad)}
+.timer button{font:inherit;font-size:26px;padding:14px 28px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.timer button.primary{background:var(--accent);color:var(--accent-ink);border:0;font-weight:700}
+/* answers */
+.ans{display:grid;grid-template-columns:1fr 1fr;gap:12px 40px}
+.ans .r{display:flex;gap:18px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 20px}
+.ans .n{flex:none;width:52px;height:52px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-weight:900;font-size:26px}
+.ans .r.low .n{background:var(--line);color:var(--ink)}
+.ans .nm{font-size:27px;font-weight:700;line-height:1.3}
+.ans .wy{font-size:19px;color:var(--muted);line-height:1.4;margin-top:2px}
+/* table */
+table.cmp{width:100%;border-collapse:collapse;font-size:30px}
+table.cmp th,table.cmp td{padding:18px 22px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;line-height:1.45}
+table.cmp th{font-size:24px;color:var(--muted);font-weight:500}
+table.cmp td:first-child{color:var(--muted);width:200px;font-size:26px}
+table.cmp td:nth-child(3){color:var(--accent)}
+.bands td{font-size:28px;padding:12px 22px}
+.bands td:first-child{font-variant-numeric:tabular-nums;color:var(--ink);font-weight:700;width:200px}
+.code{display:inline-block;background:var(--accent);color:var(--accent-ink);font-weight:900;border-radius:16px;padding:4px 26px;margin-left:12px}
+.quote{font-family:"Noto Serif TC",serif;font-size:64px;line-height:1.45;font-weight:900}
+.cite{font-size:20px;color:var(--muted);line-height:1.5}
+#progress{position:fixed;left:0;bottom:0;height:4px;background:var(--accent);transition:width .3s;z-index:9}
+#hint{position:fixed;right:14px;bottom:10px;font-size:13px;color:var(--muted);opacity:.6;z-index:9}
+</style>
+</head>
+<body>
+<div id="viewport"><div id="stage">
+
+<!-- 1 封面 -->
+<section class="slide cover">
+  <div class="kicker">一場關於判斷力的實驗</div>
+  <h1>IQ<span class="vs">vs</span>智慧</h1>
+  <p class="big muted" style="margin-top:30px">先別急著聽我講 —— 我們先去一趟太平洋。</p>
+  <svg class="wave" viewBox="0 0 1600 220" preserveAspectRatio="none"><path d="M0 120 Q 200 60 400 120 T 800 120 T 1200 120 T 1600 120 V220 H0Z" fill="#0f3a57"/><path d="M0 160 Q 200 110 400 160 T 800 160 T 1200 160 T 1600 160 V220 H0Z" fill="#134a6e"/></svg>
+</section>
+
+<!-- 2 情境 -->
+<section class="slide">
+  <div class="kicker">情境</div>
+  <h2>你在太平洋上漂流</h2>
+  <p class="f">你和三位朋友租了一艘遊艇橫渡太平洋。途中廚房起火，<span class="accent">船長和船員在救火時罹難</span>，船正在慢慢下沉。</p>
+  <p class="f">導航和無線電都燒壞了。你只知道：離最近的陸地，<span class="accent">還有好幾百英里</span>。</p>
+  <p class="f">你們搶救出 <b class="sea">14 件物品</b>，還有一艘四人橡皮救生筏和一盒火柴。</p>
+</section>
+
+<!-- 3 物品 -->
+<section class="slide" style="padding-top:60px">
+  <div class="kicker">你手上有這些</div>
+  <h2 style="margin-bottom:24px">14 件物品</h2>
+  <div class="items" id="itemList"></div>
+  <p class="muted" style="font-size:26px;margin:18px 0 0">＋ 一艘四人橡皮救生筏、一盒火柴（不用排序）</p>
+</section>
+
+<!-- 4 QR + 個人 -->
+<section class="slide">
+  <div class="kicker">第一步｜個人排序</div>
+  <div class="qrwrap">
+    <div id="qr"></div>
+    <div>
+      <h2 style="margin-bottom:20px">拿出手機，掃描 QR Code</h2>
+      <ul class="clean">
+        <li>依「對等待救援的重要程度」排出 1–14 名</li>
+        <li><b class="accent">自己想，先不要討論</b></li>
+        <li>時間 10 分鐘</li>
+      </ul>
+      <div class="timer" data-sec="600"><span class="t">10:00</span><button class="primary">開始</button><button>重設</button></div>
+      <div class="url" id="qrUrl"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 團隊 -->
+<section class="slide">
+  <div class="kicker">第二步｜團隊排序</div>
+  <h2>3–4 人一組，討論出一份共識</h2>
+  <div class="grid2" style="gap:60px">
+    <div>
+      <p style="margin-top:0">在手機上按「完成個人排序」後，進入團隊排序。每個人都可以在自己的手機上記錄團隊答案。</p>
+      <div class="timer" data-sec="1200"><span class="t">20:00</span><button class="primary">開始</button><button>重設</button></div>
+    </div>
+    <div class="card">
+      <h3 class="accent">討論守則</h3>
+      <ul class="clean" style="margin-top:8px">
+        <li style="font-size:29px">不投票、不平均，要真的達成共識</li>
+        <li style="font-size:29px">用理由說服，不用音量說服</li>
+        <li style="font-size:29px">別為了和氣而輕易讓步</li>
+        <li style="font-size:29px">特別聽聽少數意見</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 6 計分 -->
+<section class="slide">
+  <div class="kicker">怎麼計分</div>
+  <h2>和專家差多少？</h2>
+  <p>專家：<b class="sea">美國海岸防衛隊</b>（U.S. Coast Guard）</p>
+  <p class="f">每件物品：<b>｜你的名次 − 專家名次｜</b>，14 件加總。</p>
+  <p class="f">例如你把地圖排第 2，專家排第 13 → 差 <b class="accent">11 分</b>。</p>
+  <p class="f big"><b>分數越低越好。</b> <span class="muted">全對是 0 分。</span></p>
+</section>
+
+<!-- 7 答案 -->
+<section class="slide" style="padding-top:60px">
+  <div class="kicker">揭曉｜美國海岸防衛隊的排序</div>
+  <div class="ans" id="ansList"></div>
+</section>
+
+<!-- 8 專家思路 -->
+<section class="slide">
+  <div class="kicker">專家怎麼想</div>
+  <h2>救生筏上，只有兩件事重要</h2>
+  <div class="grid2">
+    <div class="card f"><h3 class="accent">1. 讓人看見你</h3><p>鏡子、油料。沒有求救信號，幾乎不可能被發現。</p></div>
+    <div class="card f"><h3 class="accent">2. 撐到救援到來</h3><p>水、口糧、塑膠布。大多數救援發生在頭 36 小時內，最少的食物和水就能撐過去。</p></div>
+  </div>
+  <p class="f quote" style="font-size:52px;margin-top:50px">「重要的不是你在哪裡，<br>而是<span class="accent">救援的人</span>在哪裡。」</p>
+</section>
+
+<!-- 9 看分數 -->
+<section class="slide">
+  <div class="kicker">看看你的分數</div>
+  <h2>在手機上輸入代碼<span class="code">36</span></h2>
+  <p class="muted" style="font-size:26px;margin:-14px 0 24px">（36 = 大多數海上救援發生的黃金時數）</p>
+  <table class="cmp bands" id="bandTbl"></table>
+</section>
+
+<!-- 10 回組討論 -->
+<section class="slide">
+  <div class="kicker">回到小組</div>
+  <h2>比一比：個人分數 vs 團隊分數</h2>
+  <ul class="clean">
+    <li class="f">團隊分數比組內<b class="accent">平均個人分數</b>好嗎？比<b class="accent">最好的個人</b>好嗎？</li>
+    <li class="f">討論中，是什麼讓你改變了想法？是理由，還是說話的人？</li>
+    <li class="f">組裡有人其實是對的，卻沒被聽見嗎？</li>
+  </ul>
+</section>
+
+<!-- 11 轉場 -->
+<section class="slide">
+  <div class="kicker">為什麼這麼多人排錯？</div>
+  <h2>我們的直覺：<span class="sea">自己划回陸地</span></h2>
+  <p class="f">所以地圖、收音機、釣具排得很前面 —— 這是在<b>「解題」</b>：怎麼導航？怎麼撐 20 天？</p>
+  <p class="f">專家先做了另一件事：<b class="accent">重新定義問題</b>。<br>問題不是「怎麼到陸地」，而是「怎麼讓別人找到我」。</p>
+  <p class="f big" style="margin-top:30px">聰明，讓你把題目解得又快又好。<br><span class="accent">智慧，讓你先確認題目對不對。</span></p>
+</section>
+
+<!-- 12 比較 -->
+<section class="slide">
+  <div class="kicker">IQ vs 智慧</div>
+  <h2 style="margin-bottom:20px">它們是兩種不同的能力</h2>
+  <table class="cmp">
+    <tr><th></th><th>IQ（智力）</th><th>智慧</th></tr>
+    <tr><td>擅長</td><td>推理、記憶、運算、解題速度</td><td>判斷、權衡、在不確定中做決定</td></tr>
+    <tr><td>面對的問題</td><td>有標準答案、條件明確</td><td>沒有標準答案、牽涉人與價值</td></tr>
+    <tr><td>關鍵提問</td><td>「答案是什麼？」</td><td>「這是對的問題嗎？我漏看了什麼？」</td></tr>
+    <tr><td>對自己</td><td>相信自己的推論</td><td>知道自己可能錯</td></tr>
+    <tr><td>對別人</td><td>說服別人</td><td>聽懂別人</td></tr>
+  </table>
+</section>
+
+<!-- 13 研究 -->
+<section class="slide">
+  <div class="kicker">研究怎麼說</div>
+  <h2>聰明，不等於明智</h2>
+  <div class="grid2" style="grid-template-columns:1fr 1fr 1fr;gap:30px">
+    <div class="card f"><h3 class="accent">理性障礙</h3><p>高智商的人，一樣會犯系統性的判斷錯誤。IQ 測的是「能力」，不是「會不會用對地方」。</p><p class="cite" style="margin-top:14px">Stanovich, <i>What Intelligence Tests Miss</i> (2009)</p></div>
+    <div class="card f"><h3 class="accent">智慧推理 &gt; IQ</h3><p>面對人際衝突時的「明智推理」，比 IQ 更能預測一個人日後的生活滿意度。</p><p class="cite" style="margin-top:14px">Grossmann et al., <i>JEP: General</i> (2013)</p></div>
+    <div class="card f"><h3 class="accent">所羅門悖論</h3><p>我們替別人想事情時，比替自己想時更明智。退一步、用旁觀者角度看，差距就縮小了。</p><p class="cite" style="margin-top:14px">Grossmann &amp; Kross, <i>Psychological Science</i> (2014)</p></div>
+  </div>
+</section>
+
+<!-- 14 智慧推理的成分 -->
+<section class="slide">
+  <div class="kicker">智慧可以練習</div>
+  <h2>明智推理的四個習慣</h2>
+  <div class="grid2" style="gap:28px 40px">
+    <div class="card f"><h3>承認自己知道的有限</h3><p>「我可能錯了 —— 船上沒有人真的懂航海。」</p></div>
+    <div class="card f"><h3>考慮不同觀點</h3><p>「救援的人，會從哪裡、用什麼方式找我們？」</p></div>
+    <div class="card f"><h3>意識到情況會改變</h3><p>「36 小時內和 20 天後，需要的東西不一樣。」</p></div>
+    <div class="card f"><h3>尋求整合，而非輸贏</h3><p>「這不是誰的答案贏，而是哪份答案能讓我們活下來。」</p></div>
+  </div>
+  <p class="cite" style="margin-top:22px">架構參考：Grossmann et al., wise reasoning（智識謙遜、觀點取替、覺察變化與不確定、尋求折衷整合）</p>
+</section>
+
+<!-- 15 收束 -->
+<section class="slide">
+  <div class="kicker">這艘救生筏教我們的事</div>
+  <ul class="clean" style="margin-top:20px">
+    <li class="f big">先問：<b class="accent">我們真正要解決的是什麼？</b></li>
+    <li class="f big">知道自己不懂的時候，去找懂的人。</li>
+    <li class="f big">最聰明的人，不一定讓團隊最好；<br><b class="accent">會傾聽的團隊</b>才會。</li>
+    <li class="f big">替自己做決定時，試著用旁觀者的眼光。</li>
+  </ul>
+</section>
+
+<!-- 16 結語 -->
+<section class="slide cover">
+  <p class="quote">IQ 幫你找到答案，<br><span class="accent">智慧</span>幫你找到對的問題。</p>
+  <p class="big muted" style="margin-top:50px">謝謝大家</p>
+  <div class="foot"><span>活動改編自 Lost at Sea：Grahame Knox（insight.typepad.co.uk, CC BY-NC-ND 3.0）；專家排序與理由：美國海岸防衛隊（NCIPH EpiTeams 整理）</span></div>
+  <svg class="wave" viewBox="0 0 1600 220" preserveAspectRatio="none"><path d="M0 120 Q 200 60 400 120 T 800 120 T 1200 120 T 1600 120 V220 H0Z" fill="#0f3a57"/><path d="M0 160 Q 200 110 400 160 T 800 160 T 1200 160 T 1600 160 V220 H0Z" fill="#134a6e"/></svg>
+</section>
+
+</div></div>
+<div id="progress"></div>
+<div id="hint">← → 換頁　F 全螢幕　T 計時</div>
+
+<script src="data.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+(function(){
+  var S=window.SEA;
+  // 物品清單（打亂順序，與手機頁一致）
+  var display=["net","shark","radio","rations","maps","cushion","oil","plastic","rum","mirror","rope","choco","fishing","water"];
+  var byId={}; S.items.forEach(function(it){byId[it.id]=it;});
+  var L="ABCDEFGHIJKLMN";
+  document.getElementById("itemList").innerHTML=display.map(function(id,i){return "<div><b>"+L[i]+"</b>"+byId[id].name+"</div>";}).join("");
+
+  // 答案：1–7 左欄、8–14 右欄，從 14 揭曉到 1
+  var sorted=S.items.slice().sort(function(a,b){return a.rank-b.rank;}), html="";
+  for (var i=0;i<7;i++){ [sorted[i],sorted[i+7]].forEach(function(it){
+    html+='<div class="r f'+(it.rank>7?' low':'')+'" data-o="'+(15-it.rank)+'"><span class="n">'+it.rank+'</span><div><div class="nm">'+it.name+'</div><div class="wy">'+it.why+'</div></div></div>';
+  }); }
+  document.getElementById("ansList").innerHTML=html;
+
+  // 級距
+  var prev=-1;
+  document.getElementById("bandTbl").innerHTML=S.bands.map(function(b){
+    var r=b.max>=999? (prev+1)+" 以上" : (prev+1)+" – "+b.max; prev=b.max;
+    return "<tr><td>"+r+"</td><td><b>"+b.label+"</b>　<span class='muted'>"+b.text+"</span></td></tr>";
+  }).join("");
+
+  // QR Code：預設指向同一資料夾的 sea.html，可用 ?qr=網址 覆寫
+  var q=new URLSearchParams(location.search).get("qr");
+  var url=q || new URL("sea.html", location.href).href;
+  document.getElementById("qrUrl").textContent=url;
+  try { new QRCode(document.getElementById("qr"),{text:url,width:380,height:380,correctLevel:QRCode.CorrectLevel.M}); }
+  catch(e){ document.getElementById("qr").innerHTML="<div style='width:380px;height:380px;display:grid;place-items:center;color:#333;font-size:22px;text-align:center'>QR Code 載入失敗<br>請確認網路連線</div>"; }
+
+  // 投影片引擎
+  var slides=[].slice.call(document.querySelectorAll(".slide")), idx=0, stage=document.getElementById("stage");
+  function frags(s){ return [].slice.call(s.querySelectorAll(".f")).sort(function(a,b){return (+a.dataset.o||0)-(+b.dataset.o||0);}); }
+  function fit(){ var k=Math.min(innerWidth/1600, innerHeight/900); stage.style.transform="scale("+k+")"; }
+  function show(n, fromBack){
+    idx=Math.max(0,Math.min(slides.length-1,n));
+    slides.forEach(function(s,i){ s.classList.toggle("on",i===idx); });
+    frags(slides[idx]).forEach(function(f){ f.classList.toggle("show",!!fromBack); });
+    document.getElementById("progress").style.width=((idx+1)/slides.length*100)+"%";
+    try { history.replaceState(null,"",location.pathname+location.search+"#"+(idx+1)); } catch(e){}
+  }
+  function next(){ var h=frags(slides[idx]).filter(function(f){return !f.classList.contains("show");}); if(h.length) h[0].classList.add("show"); else if(idx<slides.length-1) show(idx+1); }
+  function prevS(){ var v=frags(slides[idx]).filter(function(f){return f.classList.contains("show");}); if(v.length) v[v.length-1].classList.remove("show"); else if(idx>0) show(idx-1,true); }
+  addEventListener("keydown",function(e){
+    if (["ArrowRight","PageDown"," ","Enter"].indexOf(e.key)>=0){ e.preventDefault(); next(); }
+    else if (["ArrowLeft","PageUp","Backspace"].indexOf(e.key)>=0){ e.preventDefault(); prevS(); }
+    else if (e.key==="Home") show(0); else if (e.key==="End") show(slides.length-1);
+    else if (e.key==="f"||e.key==="F"){ if(!document.fullscreenElement) document.documentElement.requestFullscreen().catch(function(){}); else document.exitFullscreen(); }
+    else if (e.key==="t"||e.key==="T"){ var b=slides[idx].querySelector(".timer .primary"); if(b) b.click(); }
+  });
+  document.getElementById("viewport").addEventListener("click",function(e){
+    if (e.target.closest("button,a")) return;
+    if (e.clientX < innerWidth*0.25) prevS(); else next();
+  });
+  addEventListener("resize",fit); fit();
+
+  // 計時器
+  [].forEach.call(document.querySelectorAll(".timer"),function(t){
+    var total=+t.dataset.sec, left=total, h=null, btn=t.querySelectorAll("button"), out=t.querySelector(".t");
+    function draw(){ var m=Math.floor(left/60), s=left%60; out.textContent=m+":"+(s<10?"0":"")+s; t.classList.toggle("done",left===0); }
+    btn[0].onclick=function(){
+      if(h){ clearInterval(h); h=null; btn[0].textContent="繼續"; return; }
+      if(left===0) left=total;
+      btn[0].textContent="暫停";
+      h=setInterval(function(){ left--; draw(); if(left<=0){ clearInterval(h); h=null; btn[0].textContent="開始"; } },1000);
+    };
+    btn[1].onclick=function(){ clearInterval(h); h=null; left=total; btn[0].textContent="開始"; draw(); };
+    draw();
+  });
+
+  var start=parseInt(location.hash.slice(1),10);
+  show(isNaN(start)?0:start-1);
+})();
+</script>
+</body>
+</html>
