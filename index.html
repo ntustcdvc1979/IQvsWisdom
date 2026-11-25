@@ -33,6 +33,9 @@ ul.clean li::before{content:"";position:absolute;left:6px;top:.62em;width:16px;h
 .f{opacity:0;transform:translateY(14px);transition:opacity .45s,transform .45s}
 .f.show{opacity:1;transform:none}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.timeline{display:flex;flex-direction:column;gap:10px}
+.timeline>div{display:flex;gap:22px;align-items:baseline;font-size:30px;line-height:1.5}
+.timeline b{flex:none;width:130px;color:var(--sea);font-size:30px}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
 .book{margin-left:18px;padding:2px 14px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:20px;letter-spacing:.05em;font-weight:500}
 .card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:30px 36px}
@@ -261,13 +264,14 @@ table.teams td.win{color:var(--good);font-weight:700}
 </section>
 
 <!-- 故事：一萬元填滿屋子 -->
-<section class="slide">
+<section class="slide" style="padding-top:70px">
   <div class="kicker">一個故事</div>
-  <h2>用一萬元，把屋子填滿</h2>
-  <p class="f">富商年老退休，把三個兒子叫到面前：<br>「每人給你們<b class="accent">一萬元</b>。誰能把這間屋子填滿，我就把事業交給誰。」</p>
-  <p class="f">兩個兒子費盡力氣，想著怎麼買到最多的東西塞進去，屋子還是填不滿。</p>
-  <p class="f">最後一個兒子，只拿出<b class="accent">一根蠟燭</b>。</p>
-  <p class="f big" style="margin-top:24px">點亮它，<span class="accent">光，填滿了整間屋子。</span></p>
+  <h2 style="margin-bottom:24px">用一萬元，把屋子填滿</h2>
+  <p class="f" style="font-size:35px;line-height:1.6;margin:0 0 20px">富商年老退休，把三個兒子叫到面前，每人給<b class="accent">一萬元</b>：<br>「誰能用這筆錢把屋子填滿，我就把事業交給誰。」</p>
+  <p class="f" style="font-size:35px;line-height:1.6;margin:0 0 20px"><b class="sea">大兒子</b>買了一棵大樹，硬是搬進屋裡，佔了一大塊空間，還是沒滿。</p>
+  <p class="f" style="font-size:35px;line-height:1.6;margin:0 0 20px"><b class="sea">二兒子</b>買了一大堆稻草，塞了一屋子，也只填了一大半。</p>
+  <p class="f" style="font-size:35px;line-height:1.6;margin:0 0 20px"><b class="sea">小兒子</b>只花一點錢，買了<b class="accent">一根蠟燭</b>。</p>
+  <p class="f big" style="margin-top:20px">點亮它，<span class="accent">光，填滿了整間屋子。</span></p>
 </section>
 
 <!-- 故事：解決還是執著 -->
@@ -314,28 +318,44 @@ table.teams td.win{color:var(--good);font-weight:700}
     </div>
   </div>
   <p class="f" style="margin-top:28px;font-size:30px">「不要光聽腦袋的聲音，還要<span class="accent">傾聽內心的聲音</span>。」—— 湯馬斯・佛里曼<span class="cite" style="font-size:22px">（《精準成長》）</span></p>
-  <p class="f" style="font-size:30px">「往外看的人做夢，<span class="accent">往內看的人清醒</span>。」—— 榮格</p>
+  <p class="f" style="font-size:30px">「往外看的人做夢，<span class="accent">往內看的人清醒</span>。」—— 心理學家卡爾・榮格</p>
 </section>
 
 <!-- 早餐前的珍珠 -->
-<section class="slide" style="padding-top:70px">
+<section class="slide" style="padding-top:64px">
   <div class="kicker">一個真實的實驗　<span class="book">《超高效創意思考心智圖法》</span></div>
-  <h2>早餐前的珍珠</h2>
-  <p class="f" style="font-size:31px;line-height:1.6">2007 年一個早上，華盛頓地鐵站裡有人拉了 45 分鐘的巴哈。約 <b>1,100 人</b>經過，只有 <b>6 個人</b>停下來聽。</p>
-  <p class="f" style="font-size:31px;line-height:1.6">他是世界頂尖小提琴家<b class="sea">約夏・貝爾</b>，手上的琴價值 350 萬美元；三天前他的演奏會票價平均 100 美元，全數售罄。</p>
-  <p class="f" style="font-size:31px;line-height:1.6">每一個經過的<b class="accent">小孩</b>都想停下來聽 —— 卻都被趕時間的父母拉走了，一邊走一邊回頭看。</p>
-  <p class="f" style="margin-top:18px;font-size:38px;line-height:1.5">感受美、看見重要事物的能力，我們本來就有。<br><span class="accent">是「趕時間」的聲音把它蓋過了。</span></p>
+  <h2 style="margin-bottom:22px">早餐前的珍珠</h2>
+  <p style="font-size:30px;margin:0 0 10px">2007 年 1 月一個寒冷的早上，華盛頓地鐵站，上班尖峰。一位小提琴手拉了 45 分鐘的巴哈，約 <b>1,100 人</b>經過。</p>
+  <div class="timeline">
+    <div class="f"><b>3 分鐘</b><span>一位中年男子放慢腳步，停了幾秒，又匆匆離開。</span></div>
+    <div class="f"><b>4 分鐘</b><span>收到第一塊錢。一位女士把錢丟進帽子，腳步沒停。</span></div>
+    <div class="f"><b>6 分鐘</b><span>一個年輕人靠著牆聽，看了看錶，走了。</span></div>
+    <div class="f"><b>10 分鐘</b><span>一個三歲小孩停下來，被媽媽拉走，<span class="accent">一邊走一邊回頭看</span>。每個小孩都這樣，每個父母都把孩子拉走 —— 沒有例外。</span></div>
+    <div class="f"><b>45 分鐘</b><span>只有 <b>6 個人</b>停下來聽了一會兒，約 20 人給錢，總共 32 美元。</span></div>
+    <div class="f"><b>結束</b><span>琴聲停了，一片安靜。沒有人注意到，沒有人鼓掌。</span></div>
+  </div>
+</section>
+
+<!-- 早餐前的珍珠：揭曉 -->
+<section class="slide">
+  <div class="kicker">他是誰？</div>
+  <h2>約夏・貝爾（Joshua Bell）</h2>
+  <p class="f">世界頂尖的小提琴家。那天他拉的是史上最難的曲子之一，手上的琴價值 <b class="accent">350 萬美元</b>。</p>
+  <p class="f">三天前，他在波士頓演出同樣的曲目，票價平均 <b class="accent">100 美元</b>，全數售罄。</p>
+  <p class="f">這是《華盛頓郵報》安排的社會實驗：在平凡的地方、不對的時間，我們還看得見美嗎？</p>
+  <p class="f" style="margin-top:24px;font-size:38px;line-height:1.5">感受美、看見重要事物的能力，我們本來就有 —— 小孩都還記得。<br><span class="accent">是「趕時間」的聲音把它蓋過了。</span></p>
 </section>
 
 <!-- 智商稅 -->
-<section class="slide">
+<section class="slide" style="padding-top:60px">
   <div class="kicker">最常蓋過內心聲音的四種雜音</div>
-  <h2>聰明人最常繳的四種「智商稅」</h2>
-  <div class="grid2" style="gap:26px 40px">
-    <div class="card f"><h3>1. 忙著證明自己懂</h3><p>梭羅：「如果我們時時忙著展現自己的知識，將何從憶起成長所需的無知？」</p><p class="cite" style="margin-top:8px">《與成功有約》</p></div>
-    <div class="card f"><h3>2. 看不起簡單的事</h3><p>蘇格拉底要學生每天做一個簡單的運動。一年後，只剩柏拉圖還在做。</p><p class="cite" style="margin-top:8px">《態度決定一切》</p></div>
-    <div class="card f"><h3>3. 用同一顆腦袋解決問題</h3><p>愛因斯坦：「用製造問題的同一思維去解決問題，是行不通的。」</p><p class="cite" style="margin-top:8px">《別做熱愛的事，要做真實的自己》</p></div>
-    <div class="card f"><h3>4. 只懷疑別人</h3><p>亨利·阿諾德：「智者質疑自己，愚者質疑他人。」</p><p class="cite" style="margin-top:8px">《精準成長》</p></div>
+  <h2 style="margin-bottom:10px">聰明人最常繳的四種「智商稅」</h2>
+  <p class="muted" style="font-size:26px;margin:0 0 22px">智商稅：不是不夠聰明，而是<b class="accent">太相信自己的聰明</b>，結果付出的代價。</p>
+  <div class="grid2" style="gap:18px 34px">
+    <div class="card f" style="padding:20px 28px"><h3 style="font-size:31px;margin-bottom:6px">1. 忙著證明自己懂</h3><p style="font-size:26px;line-height:1.5">美國作家、哲學家亨利・戴維・梭羅：「如果我們時時忙著展現自己的知識，將何從憶起成長所需的無知？」</p><p class="cite" style="margin-top:8px">《與成功有約》</p></div>
+    <div class="card f" style="padding:20px 28px"><h3 style="font-size:31px;margin-bottom:6px">2. 看不起簡單的事</h3><p style="font-size:26px;line-height:1.5">蘇格拉底要學生每天把手臂往前甩、往後甩各 300 下。大家都笑：「這麼簡單，誰做不到？」一個月後，九成的人還在做；一年後，只剩一個人 —— 柏拉圖。</p><p class="cite" style="margin-top:8px">《態度決定一切》</p></div>
+    <div class="card f" style="padding:20px 28px"><h3 style="font-size:31px;margin-bottom:6px">3. 用同一顆腦袋解決問題</h3><p style="font-size:26px;line-height:1.5">愛因斯坦：「用製造問題的同一思維去解決問題，是行不通的。」</p><p class="cite" style="margin-top:8px">《別做熱愛的事，要做真實的自己》</p></div>
+    <div class="card f" style="padding:20px 28px"><h3 style="font-size:31px;margin-bottom:6px">4. 只懷疑別人</h3><p style="font-size:26px;line-height:1.5">美國漫畫家亨利・阿諾德：「智者質疑自己，愚者質疑他人。」</p><p class="cite" style="margin-top:8px">《精準成長》</p></div>
   </div>
 </section>
 
