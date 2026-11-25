@@ -36,6 +36,8 @@ ul.clean li::before{content:"";position:absolute;left:6px;top:.62em;width:16px;h
 .timeline{display:flex;flex-direction:column;gap:10px}
 .timeline>div{display:flex;gap:22px;align-items:baseline;font-size:30px;line-height:1.5}
 .timeline b{flex:none;width:130px;color:var(--sea);font-size:30px}
+.chip{font-size:26px;padding:8px 20px;border-radius:999px;border:1px solid var(--line);background:var(--card)}
+.chip.hi{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:700}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
 .book{margin-left:18px;padding:2px 14px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:20px;letter-spacing:.05em;font-weight:500}
 .card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:30px 36px}
@@ -251,16 +253,41 @@ table.teams td.win{color:var(--good);font-weight:700}
   </ul>
 </section>
 
-<!-- 書：共好與同贏 -->
-<section class="slide">
-  <div class="kicker">團隊的智慧　<span class="book">《共好與同贏》</span></div>
-  <h2>把最會下蛋的雞放在一起，會怎樣？</h2>
-  <div class="grid3">
-    <div class="card f"><h3 class="accent">超級雞實驗</h3><p>生物學家威廉·謬爾每代只挑產蛋最多的雞繁殖。幾代之後，「超級雞群」互啄到只剩少數存活，產量反而輸給普通雞群。</p></div>
-    <div class="card f"><h3 class="accent">螢火蟲</h3><p>各自發光求偶，成功率只有 <b>3%</b>；集體同步發光，成功率提高到 <b>82%</b>。</p></div>
-    <div class="card f"><h3 class="accent">Google 亞里斯多德計劃</h3><p>好團隊的第一個條件不是聰明，而是<b>心理安全感</b>：敢說「我覺得不對」，而不怕被笑。</p></div>
+<!-- 書：共好與同贏 1 超級雞 -->
+<section class="slide" style="padding-top:66px">
+  <div class="kicker">團隊的智慧 1／3　<span class="book">《共好與同贏》</span></div>
+  <h2 style="margin-bottom:24px">把最會下蛋的雞放在一起，會怎樣？</h2>
+  <p class="f" style="font-size:31px">美國普渡大學的生物學家威廉・謬爾想知道：怎樣才能讓雞下更多蛋？他把雞分成兩群，觀察了六個世代。</p>
+  <div class="grid2" style="gap:30px;margin:10px 0 24px">
+    <div class="card f"><h3 class="sea">普通雞群</h3><p>不做任何挑選，讓牠們自然繁衍。</p></div>
+    <div class="card f"><h3 class="accent">「超級雞」群</h3><p>每一代只挑產蛋最多的那幾隻來繁殖。</p></div>
   </div>
-  <p class="f quote" style="font-size:40px;margin-top:40px">「天分使人贏得球賽，但團隊合作與才智使人贏得冠軍賽。」<span class="cite" style="font-size:24px">— 麥可·喬丹</span></p>
+  <p class="f" style="font-size:31px">六代之後，普通雞群健康、羽毛豐滿，產蛋量大幅增加；<br>超級雞群只剩 <b class="accent">3 隻</b>活著 —— 其他的，都被同伴啄死了。</p>
+  <p class="f big" style="margin-top:14px">牠們的「高產」，是靠<span class="accent">打壓同伴</span>得來的。</p>
+</section>
+
+<!-- 書：共好與同贏 2 螢火蟲 -->
+<section class="slide">
+  <div class="kicker">團隊的智慧 2／3　<span class="book">《共好與同贏》</span></div>
+  <h2>一隻螢火蟲 vs 一群螢火蟲</h2>
+  <p class="f">雄螢火蟲靠閃光吸引雌螢火蟲。夜裡到處都是閃光，雌螢火蟲要認出同類並不容易。</p>
+  <div class="grid2" style="gap:30px;margin:16px 0 26px">
+    <div class="card f" style="text-align:center"><p>各自閃光</p><b style="display:block;font-size:110px;line-height:1.1;color:var(--muted)">3%</b><p class="muted">雌螢火蟲回應的機率</p></div>
+    <div class="card f" style="text-align:center"><p>整群同步閃光</p><b style="display:block;font-size:110px;line-height:1.1;color:var(--accent)">82%</b><p class="muted">雌螢火蟲回應的機率</p></div>
+  </div>
+  <p class="f big">不是誰最亮，而是<span class="accent">大家一起亮</span>。</p>
+</section>
+
+<!-- 書：共好與同贏 3 Google -->
+<section class="slide">
+  <div class="kicker">團隊的智慧 3／3　<span class="book">《共好與同贏》</span></div>
+  <h2 style="margin-bottom:20px">Google 亞里斯多德計劃</h2>
+  <p class="f" style="font-size:31px">Google 研究了公司裡 180 多個團隊，想找出「完美團隊的公式」。結論出乎意料：<b class="accent">團隊裡有誰，不如團隊怎麼合作來得重要。</b></p>
+  <div class="f" style="display:flex;gap:14px;flex-wrap:wrap;margin:18px 0">
+    <span class="chip hi">1 心理安全感</span><span class="chip">2 可靠的夥伴</span><span class="chip">3 結構與透明度</span><span class="chip">4 工作的意義</span><span class="chip">5 工作的影響力</span>
+  </div>
+  <div class="card f"><p><b class="accent">最重要的是心理安全感：</b>在團隊裡敢提問、敢說「我不懂」「我覺得不對」，不怕被笑、不怕被懲罰。</p></div>
+  <p class="f quote" style="font-size:36px;margin-top:26px">「天分使人贏得球賽，但團隊合作與才智使人贏得冠軍賽。」<span class="cite" style="font-size:22px">— 麥可・喬丹</span></p>
 </section>
 
 <!-- 故事：一萬元填滿屋子 -->
@@ -347,15 +374,15 @@ table.teams td.win{color:var(--good);font-weight:700}
 </section>
 
 <!-- 智商稅 -->
-<section class="slide" style="padding-top:60px">
+<section class="slide" style="padding-top:46px">
   <div class="kicker">最常蓋過內心聲音的四種雜音</div>
   <h2 style="margin-bottom:10px">聰明人最常繳的四種「智商稅」</h2>
-  <p class="muted" style="font-size:26px;margin:0 0 22px">智商稅：不是不夠聰明，而是<b class="accent">太相信自己的聰明</b>，結果付出的代價。</p>
-  <div class="grid2" style="gap:18px 34px">
-    <div class="card f" style="padding:20px 28px"><h3 style="font-size:31px;margin-bottom:6px">1. 忙著證明自己懂</h3><p style="font-size:26px;line-height:1.5">學生不肯發問、不肯暴露自己的無知，就學不到東西。美國作家、哲學家亨利・戴維・梭羅：「如果我們時時忙著展現自己的知識，將何從憶起成長所需的無知？」</p><p class="cite" style="margin-top:8px">《與成功有約》</p></div>
-    <div class="card f" style="padding:20px 28px"><h3 style="font-size:31px;margin-bottom:6px">2. 看不起簡單的事</h3><p style="font-size:26px;line-height:1.5">蘇格拉底要學生每天把手臂往前甩、往後甩各 300 下。大家都笑：「這麼簡單，誰做不到？」一個月後，九成的人還在做；一年後，只剩一個人 —— 柏拉圖。</p><p class="cite" style="margin-top:8px">《態度決定一切》</p></div>
-    <div class="card f" style="padding:20px 28px"><h3 style="font-size:31px;margin-bottom:6px">3. 用同一顆腦袋解決問題</h3><p style="font-size:26px;line-height:1.5">愛因斯坦：「用製造問題的同一思維去解決問題，是行不通的。」</p><p class="cite" style="margin-top:8px">《別做熱愛的事，要做真實的自己》</p></div>
-    <div class="card f" style="padding:20px 28px"><h3 style="font-size:31px;margin-bottom:6px">4. 只懷疑別人</h3><p style="font-size:26px;line-height:1.5">美國漫畫家亨利・阿諾德：「智者質疑自己，愚者質疑他人。」</p><p class="cite" style="margin-top:8px">《精準成長》</p></div>
+  <p class="muted" style="font-size:26px;margin:0 0 14px">智商稅：不是不夠聰明，而是<b class="accent">太相信自己的聰明</b>，結果付出的代價。</p>
+  <div class="grid2" style="gap:14px 30px">
+    <div class="card f" style="padding:16px 24px"><h3 style="font-size:30px;margin-bottom:4px">1. 忙著證明自己懂</h3><p style="font-size:26px;line-height:1.45">學生不肯發問、不肯暴露自己的無知，就學不到東西。美國作家、哲學家亨利・戴維・梭羅：「如果我們時時忙著展現自己的知識，將何從憶起成長所需的無知？」</p><p class="cite" style="margin-top:4px;font-size:18px">《與成功有約》</p></div>
+    <div class="card f" style="padding:16px 24px"><h3 style="font-size:30px;margin-bottom:4px">2. 看不起簡單的事</h3><p style="font-size:26px;line-height:1.45">相傳蘇格拉底要學生每天把手臂往前甩、往後甩各 300 下。大家都笑：「這麼簡單，誰做不到？」一個月後，九成的人還在做；一年後，只剩一個人 —— 柏拉圖。</p><p class="cite" style="margin-top:4px;font-size:18px">《態度決定一切》</p></div>
+    <div class="card f" style="padding:16px 24px"><h3 style="font-size:30px;margin-bottom:4px">3. 用同一顆腦袋解決問題</h3><p style="font-size:26px;line-height:1.45">常被認為是愛因斯坦說的：「用製造問題的同一思維去解決問題，是行不通的。」卡住時，聰明人常用同一套想法更用力：報告被退件，就照原方向再熬一夜；救生筏划不到岸，就划得更用力。</p><p class="cite" style="margin-top:4px;font-size:18px">《別做熱愛的事，要做真實的自己》</p></div>
+    <div class="card f" style="padding:16px 24px"><h3 style="font-size:30px;margin-bottom:4px">4. 只懷疑別人</h3><p style="font-size:26px;line-height:1.45">美國漫畫家亨利・阿諾德：「智者質疑自己，愚者質疑他人。」<br><b class="accent">研究佐證：</b>人很容易看見別人的偏誤，卻看不見自己的（偏誤盲點）；而且越聰明的人，這個盲點並沒有比較小。</p><p class="cite" style="margin-top:4px;font-size:18px">《精準成長》；West, Meserve &amp; Stanovich, <i>JPSP</i> (2012)</p></div>
   </div>
 </section>
 
