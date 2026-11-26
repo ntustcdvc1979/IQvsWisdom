@@ -36,6 +36,10 @@ ul.clean li::before{content:"";position:absolute;left:6px;top:.62em;width:16px;h
 .chip{font-size:26px;padding:8px 20px;border-radius:999px;border:1px solid var(--line);background:var(--card)}
 .chip.hi{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:700}
 .how{border-color:var(--accent)}
+.comics{display:flex;gap:40px;justify-content:center;align-items:flex-start}
+.comic{display:flex;flex-direction:column;gap:12px}
+.comic .panel{background-image:url(assets/lighthouse.jpg);background-repeat:no-repeat;border-radius:10px;border:2px solid var(--line)}
+.comic p{margin:0;font-size:25px;line-height:1.5;max-width:100%}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
 .book{margin-left:18px;padding:2px 14px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:20px;letter-spacing:.05em;font-weight:500}
 .card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:30px 36px}
@@ -90,6 +94,19 @@ table.teams td,table.teams th{font-size:24px;padding:6px 18px;text-align:center}
 table.teams td:first-child{text-align:left;width:auto;color:var(--ink)}
 table.teams td.win{color:var(--good);font-weight:700}
 .wait{font-size:30px;color:var(--muted)}
+.gbar{display:flex;align-items:center;gap:24px;margin-top:30px}
+.gbar button{font:inherit;font-size:26px;padding:14px 28px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.gbar button.primary{background:var(--accent);color:var(--accent-ink);border:0;font-weight:700}
+.gbar .live{margin:0}
+.hist{position:relative;display:flex;gap:12px;height:360px;align-items:flex-end;padding:76px 0 40px}
+.hist .hb{flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;position:relative}
+.hist .hbar{width:100%;background:var(--sea);border-radius:8px 8px 0 0;min-height:3px;position:relative;opacity:.85}
+.hist .hbar span{position:absolute;top:-34px;left:0;right:0;text-align:center;font-size:24px;font-weight:700}
+.hist .hl{position:absolute;bottom:-36px;left:0;right:0;text-align:center;font-size:20px;color:var(--muted)}
+.hist .hm{position:absolute;top:0;bottom:40px;width:4px;margin-left:-2px;background:var(--accent);z-index:2}
+.hist .hm b{position:absolute;top:-2px;left:10px;white-space:nowrap;font-size:22px;color:var(--accent)}
+.hist .hm.host{background:none;width:0;border-left:4px dashed var(--bad);top:36px}
+.hist .hm.host b{color:var(--bad);top:0}
 #hostBtn{position:fixed;left:10px;bottom:8px;z-index:20;background:none;border:0;color:var(--muted);opacity:.35;font-size:20px;cursor:pointer}
 #hostBtn:hover{opacity:1}
 #host{position:fixed;left:16px;bottom:44px;z-index:21;width:340px;max-width:calc(100vw - 32px);background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 10px 40px rgba(0,0,0,.5);font-size:15px;line-height:1.6;display:none}
@@ -231,12 +248,14 @@ table.teams td.win{color:var(--good);font-weight:700}
 </section>
 
 <!-- 書：與成功有約 -->
-<section class="slide">
-  <div class="kicker">換個角度看問題　<span class="book">《與成功有約》</span></div>
-  <p class="f">濃霧中，戰艦艦長看到前方有燈光，下令發訊：「請轉向 20 度。」</p>
-  <p class="f">對方回覆：「建議你們轉向 20 度。」艦長大怒：「我是戰艦！你轉向！」</p>
-  <p class="f">對方回覆：<b class="accent">「我是燈塔。」</b>　—— 戰艦改了航道。</p>
-  <div class="card f" style="margin-top:30px"><p>柯維：<b>管理</b>是有效地把事情做好；<b class="accent">領導</b>是先確認做的是對的事。<br><span class="muted">救生筏上划得再好，方向錯了也沒用。</span></p></div>
+<section class="slide" style="padding-top:56px">
+  <div class="kicker" style="margin-bottom:14px">換個角度看問題　<span class="book">《與成功有約》</span></div>
+  <div class="comics">
+    <div class="comic f" style="width:365px"><div class="panel" style="width:365px;height:450px;background-size:1184px auto;background-position:-31px -26px"></div><p>濃霧中，戰艦艦長看到前方有燈光，下令發訊：「請轉向 20 度。」</p></div>
+    <div class="comic f" style="width:329px"><div class="panel" style="width:329px;height:450px;background-size:1184px auto;background-position:-420px -26px"></div><p>對方回覆：「建議你們轉向 20 度。」艦長大怒：「我是戰艦！你轉向！」</p></div>
+    <div class="comic f" style="width:368px"><div class="panel" style="width:368px;height:450px;background-size:1184px auto;background-position:-786px -26px"></div><p>對方回覆：<b class="accent">「我是燈塔。」</b>—— 戰艦改了航道。</p></div>
+  </div>
+  <div class="card f" style="margin-top:22px;padding:18px 30px"><p>柯維：<b>管理</b>是有效地把事情做好；<b class="accent">領導</b>是先確認做的是對的事。<br><span class="muted">救生筏上划得再好，方向錯了也沒用。</span></p></div>
 </section>
 
 <!-- 10 回組討論 -->
@@ -358,13 +377,54 @@ table.teams td.win{color:var(--good);font-weight:700}
   </div>
 </section>
 
+<!-- 小遊戲：猜平均數的 2/3 -->
+<section class="slide">
+  <div class="kicker">小遊戲｜拿出剛剛的手機</div>
+  <h2>猜平均數的 2/3</h2>
+  <div class="grid3">
+    <div class="card"><h3 class="accent">1. 出一個數字</h3><p>手機畫面會自動跳出來，輸入 0 到 100 的任一個整數。</p></div>
+    <div class="card"><h3 class="accent">2. 算出目標</h3><p>全場所有數字的平均 × 2/3，就是目標數字。</p></div>
+    <div class="card"><h3 class="accent">3. 最接近的贏</h3><p>誰的數字最接近目標，誰就獲勝。截止前都可以改。</p></div>
+  </div>
+  <p class="f" style="margin:30px 0 0">還有一件事：<b class="accent">主持人也會出一個數字</b>，一起算進平均。<span class="muted">（主持人不能得獎）</span></p>
+  <div class="gbar">
+    <button class="primary" id="gOpen">開放作答</button><button id="gClose">截止並揭曉</button>
+    <span class="live" id="gLive"></span>
+  </div>
+  <p class="muted" id="gHostMsg" style="font-size:22px;margin:8px 0 0;min-height:1.5em"></p>
+</section>
+
+<!-- 小遊戲：揭曉（Firebase） -->
+<section class="slide" style="padding-top:60px">
+  <div class="kicker">揭曉｜猜平均數的 2/3</div>
+  <div id="gameRes"><p class="wait">等待資料…</p></div>
+</section>
+
+<!-- 小遊戲：解讀 -->
+<section class="slide" style="padding-top:70px">
+  <div class="kicker">你想了幾層？</div>
+  <h2 style="margin-bottom:28px">算得出答案，不等於猜得中人心</h2>
+  <div class="grid2" style="gap:30px 50px;grid-template-columns:1fr 1.1fr">
+    <ul class="clean" style="font-size:30px">
+      <li class="f" style="font-size:30px">第 0 層：隨便出，平均大概 <b>50</b></li>
+      <li class="f" style="font-size:30px">第 1 層：「別人會隨便出」<br>→ 50 × 2/3 ≈ <b>33</b></li>
+      <li class="f" style="font-size:30px">第 2 層：「別人都會想到 33」<br>→ <b>22</b></li>
+      <li class="f" style="font-size:30px">一直想下去 → <b class="accent">0</b><br><span class="muted" style="font-size:24px">賽局理論的「納許均衡」，也是最「聰明」的答案</span></li>
+    </ul>
+    <div style="display:flex;flex-direction:column;gap:22px">
+      <div class="card f" style="padding:20px 28px"><h3 class="accent" style="font-size:32px">但出 0 的人很少贏</h3><p style="font-size:27px">實驗中第一輪的平均大約是 37；英國《金融時報》辦的讀者比賽，獲勝數字是 13。贏的人不是算得最遠的人，而是最懂「別人會怎麼想」的人。</p><p class="cite" style="margin-top:8px">Nagel, <i>American Economic Review</i> (1995)；Thaler, <i>Financial Times</i> (1997)</p></div>
+      <div class="card f" style="padding:20px 28px"><h3 class="accent" style="font-size:32px">主持人的那個數字</h3><p style="font-size:27px">就像人生中不可控的外在因素。你改變不了它，只能看清全局，把力氣放在自己影響得了的地方。</p></div>
+    </div>
+  </div>
+</section>
+
 <!-- 13 研究 -->
 <section class="slide">
   <div class="kicker">研究怎麼說</div>
-  <h2>聰明，不等於明智</h2>
+  <h2>聰明，不等於有智慧</h2>
   <div class="grid2" style="grid-template-columns:1fr 1fr 1fr;gap:30px">
     <div class="card f"><h3 class="accent">理性障礙</h3><p>高智商的人，一樣會犯系統性的判斷錯誤。IQ 測的是「能力」，不是「會不會用對地方」。</p><p class="cite" style="margin-top:14px">Stanovich, <i>What Intelligence Tests Miss</i> (2009)</p></div>
-    <div class="card f"><h3 class="accent">智慧推理 &gt; IQ</h3><p>面對人際衝突時的「明智推理」，比 IQ 更能預測一個人日後的生活滿意度。</p><p class="cite" style="margin-top:14px">Grossmann et al., <i>JEP: General</i> (2013)</p></div>
+    <div class="card f"><h3 class="accent">智慧推理 &gt; IQ</h3><p>面對人際衝突時的「智慧推理」，比 IQ 更能預測一個人日後的生活滿意度。</p><p class="cite" style="margin-top:14px">Grossmann et al., <i>JEP: General</i> (2013)</p></div>
     <div class="card f"><h3 class="accent">所羅門悖論</h3><p>替別人想事情時，我們比替自己想時更明智。智慧一直都在，是「切身利害」的雜音把它蓋過了。</p><p class="cite" style="margin-top:14px">Grossmann &amp; Kross, <i>Psychological Science</i> (2014)</p></div>
   </div>
 </section>
@@ -372,7 +432,7 @@ table.teams td.win{color:var(--good);font-weight:700}
 <!-- 14 智慧推理的成分 -->
 <section class="slide">
   <div class="kicker">讓內心的智慧被聽見</div>
-  <h2>明智推理的四個習慣</h2>
+  <h2>智慧思考的四個習慣</h2>
   <div class="grid2" style="gap:28px 40px">
     <div class="card f"><h3>承認自己知道的有限</h3><p>「我可能錯了 —— 船上沒有人真的懂航海。」</p></div>
     <div class="card f"><h3>考慮不同觀點</h3><p>「救援的人，會從哪裡、用什麼方式找我們？」</p></div>
@@ -441,7 +501,8 @@ table.teams td.win{color:var(--good);font-weight:700}
 <!-- 行動 3b -->
 <section class="slide" style="padding-top:70px">
   <div class="kicker">課後行動清單 3／3｜睡前 5 分鐘</div>
-  <h2 style="margin-bottom:22px">睡前三個小問題</h2>
+  <h2 style="margin-bottom:12px">睡前三個小問題</h2>
+  <p class="f" style="font-size:28px;margin:0 0 20px">曾子：「<span class="accent">吾日三省吾身</span>：為人謀而不忠乎？與朋友交而不信乎？傳不習乎？」<span class="cite" style="font-size:22px">《論語・學而》</span><br><span class="muted" style="font-size:26px">兩千多年前就有人每天問自己三個問題。今天，換我們問這三個：</span></p>
   <div class="grid3" style="gap:22px">
     <div class="card f"><h3 class="accent">1</h3><p>今天哪一刻，我差點用小聰明硬幹，後來聽了內心而轉彎？</p><p class="muted" style="font-size:24px;margin-top:10px">練習看見自己的「暫停鍵」。</p></div>
     <div class="card f"><h3 class="accent">2</h3><p>今天的一個小挫折，換個角度看，想教我什麼？</p><p class="muted" style="font-size:24px;margin-top:10px">痛苦的經歷多半可以當作彈跳床，把我們推向下一個階段。《別做熱愛的事》</p></div>
@@ -458,27 +519,6 @@ table.teams td.win{color:var(--good);font-weight:700}
     <div class="card"><h3 class="accent">智慧是「有意識的選擇」</h3><p>先停下來看清全貌、理解人心、聽聽內心，再決定下一步。</p></div>
   </div>
   <p class="f quote" style="font-size:52px;margin-top:60px">每天只要成功按下一次<span class="accent">暫停鍵</span>，<br>內心的智慧就多被聽見一次。</p>
-</section>
-
-<!-- 15 收束 -->
-<section class="slide">
-  <div class="kicker">這艘救生筏教我們的事</div>
-  <ul class="clean" style="margin-top:20px">
-    <li class="f big">先問：<b class="accent">我們真正要解決的是什麼？</b></li>
-    <li class="f big">知道自己不懂的時候，去找懂的人。</li>
-    <li class="f big">最聰明的人，不一定讓團隊最好；<br><b class="accent">會傾聽的團隊</b>才會。</li>
-    <li class="f big">替自己做決定時，試著用旁觀者的眼光。</li>
-  </ul>
-</section>
-
-<!-- 帶回岸上 -->
-<section class="slide">
-  <div class="kicker">帶回岸上的三句話</div>
-  <div style="display:flex;flex-direction:column;gap:28px;margin-top:10px">
-    <div class="f"><p class="quote" style="font-size:40px;line-height:1.4">「走錯路的人，需要的不是加速，<br>而是<span class="accent">停下來反思</span>。」</p><p class="cite" style="margin-top:6px">《精準成長》</p></div>
-    <div class="f"><p class="quote" style="font-size:40px;line-height:1.4">「你的海洋真是浩瀚，我的小船真渺小。」</p><p class="cite" style="margin-top:6px">甘迺迪總統白宮辦公桌上的匾額（《精準成長》）</p></div>
-    <div class="f"><p class="quote" style="font-size:40px;line-height:1.4">「除非有離岸的勇氣，否則無法發現<span class="accent">新的海洋</span>。」</p><p class="cite" style="margin-top:6px">安德烈·紀德（《別做熱愛的事，要做真實的自己》）</p></div>
-  </div>
 </section>
 
 <!-- 16 結語 -->
@@ -629,6 +669,7 @@ table.teams td.win{color:var(--good);font-weight:700}
   var liveCount=0;
   function renderLive(rows){
     liveCount=rows.length; var hc=document.getElementById("hCount"); if(hc) hc.textContent=rows.length;
+    lastRows=rows; renderGame();
     var nInd=rows.filter(function(r){return full(r.ind);}).length;
     var nGrp=rows.filter(function(r){return full(r.grp);}).length;
     [].forEach.call(document.querySelectorAll("[data-live]"),function(el){
@@ -677,6 +718,67 @@ table.teams td.win{color:var(--good);font-weight:700}
       }).join("")+"</table><p class='muted' style='font-size:24px;margin-top:18px'>依 "+src.length+" 份個人排序統計</p>";
   }
 
+  // ===== 小遊戲：猜平均數的 2/3 =====
+  // 主持人在手機上用暱稱「主持人」出數字：算進平均，但不能得獎
+  var lastRows=[], gameState=null;
+  function isHostNick(r){ return String(r.nick||"").trim()==="主持人"; }
+  function closest(list, t){
+    if(!list.length) return [];
+    var d=Math.min.apply(null,list.map(function(r){return Math.abs(r.guess-t);}));
+    return list.filter(function(r){return Math.abs(r.guess-t)===d;});
+  }
+  function winNames(ws){
+    var s=ws.slice(0,4).map(function(r){return esc(r.nick||"（無名）");}).join("、");
+    return s+(ws.length>4?" 等 "+ws.length+" 人":"");
+  }
+  function renderGame(){
+    var gs=lastRows.filter(function(r){return typeof r.guess==="number";});
+    var live=document.getElementById("gLive");
+    live.innerHTML= gameState==="open" ? "作答中：已有<b>"+gs.length+"</b>人出數字"
+      : gameState==="closed" ? "已截止，共<b>"+gs.length+"</b>人" : (gs.length? "已有<b>"+gs.length+"</b>人出數字" : "");
+    document.getElementById("gOpen").textContent= gameState==="open" ? "作答中…" : "開放作答";
+    var out=document.getElementById("gameRes");
+    if(!gs.length){ out.innerHTML="<p class='wait'>等待資料…（請在上一頁按「開放作答」）</p>"; return; }
+    var A=avg(gs.map(function(r){return r.guess;})), T=A*2/3;
+    var players=gs.filter(function(r){return !isHostNick(r);}), hosts=gs.filter(isHostNick);
+    var ws=closest(players,T);
+    var bins=[0,0,0,0,0,0,0,0,0,0];
+    gs.forEach(function(r){ bins[Math.min(9,Math.floor(r.guess/10))]++; });
+    var mx=Math.max.apply(null,bins);
+    var hist="<div class='hist'>"+bins.map(function(n,i){
+      return "<div class='hb'><div class='hbar' style='height:"+(n/mx*100)+"%'>"+(n?"<span>"+n+"</span>":"")+"</div><div class='hl'>"+(i*10)+"–"+(i===9?100:i*10+9)+"</div></div>";
+    }).join("")+
+      hosts.slice(0,1).map(function(h){ return "<div class='hm host' style='left:"+h.guess+"%'><b"+(h.guess>80?" style=\"left:auto;right:10px\"":"")+">主持人 "+h.guess+"</b></div>"; }).join("")+
+      "<div class='hm' style='left:"+T+"%'><b>目標 "+f1(T)+"</b></div></div>";
+    var note="";
+    if(hosts.length){
+      var rest=players.map(function(r){return r.guess;});
+      if(rest.length){
+        var T2=avg(rest)*2/3;
+        note="<p style='font-size:28px;margin:14px 0 0'>主持人出了 <b style='color:var(--bad)'>"+hosts[0].guess+"</b>。如果沒有主持人，目標會是 <b class='accent'>"+f1(T2)+"</b>，最接近的是 "+winNames(closest(players,T2))+"。</p>";
+      }
+    }
+    out.innerHTML=
+      (gameState==="open"?"<p class='muted' style='font-size:22px;margin:0 0 6px'>（作答尚未截止，數字還會變動）</p>":"")+
+      "<div class='stat'><div class='card'><small>出數字的人</small><b>"+gs.length+"</b><small>人"+(hosts.length?"（含主持人）":"")+"</small></div>"+
+      "<div class='card'><small>全場平均 × 2/3</small><b class='accent'>"+f1(T)+"</b><small>目標數字（平均 "+f1(A)+" × 2/3）</small></div>"+
+      "<div class='card'><small>最接近的人</small><b class='sea' style='font-size:44px;line-height:1.4'>"+(ws.length?winNames(ws):"–")+"</b><small>"+(ws.length?"出了 "+ws[0].guess:"")+"</small></div></div>"+
+      hist+note;
+  }
+  document.getElementById("gOpen").onclick=function(e){ e.stopPropagation(); setGame("open"); };
+  document.getElementById("gClose").onclick=function(e){ e.stopPropagation(); setGame("closed"); };
+  function setGame(state){
+    var c=window.SEACLOUD, m=document.getElementById("gHostMsg");
+    if(!c||!c.enabled){ m.textContent="尚未設定 Firebase。"; return; }
+    m.textContent="處理中…";
+    c.isHost().then(function(ok){
+      if(!ok){ m.textContent="請先按 H，用主持人 PIN 登入。"; return; }
+      return c.setGame(classId,state).then(function(){
+        m.textContent= state==="open" ? "已開放：學員手機會自動跳出猜數字畫面。主持人請用暱稱「主持人」出數字。" : "已截止，按 → 看揭曉。";
+      });
+    }).catch(function(e){ m.textContent="失敗："+e.message; });
+  }
+
   function startLive(){
     var c=window.SEACLOUD;
     if(!c) return;
@@ -685,6 +787,7 @@ table.teams td.win{color:var(--good);font-weight:700}
       ["classStats","classMiss"].forEach(function(id){document.getElementById(id).innerHTML="<p class='wait'>尚未設定 Firebase（firebase-config.js），無法顯示全班結果。</p>";});
       return;
     }
+    c.watchClass(classId, function(d){ gameState=d.game||null; renderGame(); }).catch(function(e){ console.warn(e); });
     c.watch(classId, renderLive, function(e){
       console.warn(e);
       document.getElementById("classStats").innerHTML="<p class='wait'>讀取失敗："+esc(e.message)+"</p>";

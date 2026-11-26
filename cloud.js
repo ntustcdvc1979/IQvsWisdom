@@ -59,8 +59,13 @@ window.SEACLOUD = {
       await b.commit();
     }
     await fs.setDoc(fs.doc(db, "classes", classId),
-      { round: fs.increment(1), clearedAt: fs.serverTimestamp() }, { merge: true });
+      { round: fs.increment(1), clearedAt: fs.serverTimestamp(), game: null }, { merge: true });
     return docs.length;
+  },
+  // 主持人：小遊戲狀態（"open" 開放作答／"closed" 截止）
+  async setGame(classId, state) {
+    const { db, fs } = await ready;
+    await fs.setDoc(fs.doc(db, "classes", classId), { game: state }, { merge: true });
   },
   // 即時監看整個班級的作答；回傳取消函式
   async watch(classId, cb, onErr) {
